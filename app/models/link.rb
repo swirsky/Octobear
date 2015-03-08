@@ -24,6 +24,8 @@ private
     case Rails.env
     when "development"
       ENV['DEV_URL']
+    when 'production'
+      ENV['PROD_URL']
     end
   end
 end
