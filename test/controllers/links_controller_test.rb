@@ -1,49 +1,76 @@
 require 'test_helper'
 
 class LinksControllerTest < ActionController::TestCase
-  setup do
-    @link = links(:one)
-  end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:links)
-  end
+  RSpec.describe LinksController, :type => :controller do
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create link" do
-    assert_difference('Link.count') do
-      post :create, link: { slug: @link.slug, url: @link.url }
+    before :each do
+      @link = Book.new(url:"http://www.google.com")
     end
 
-    assert_redirected_to link_path(assigns(:link))
-  end
-
-  test "should show link" do
-    get :show, id: @link
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @link
-    assert_response :success
-  end
-
-  test "should update link" do
-    patch :update, id: @link, link: { slug: @link.slug, url: @link.url }
-    assert_redirected_to link_path(assigns(:link))
-  end
-
-  test "should destroy link" do
-    assert_difference('Link.count', -1) do
-      delete :destroy, id: @link
+    describe "GET #index" do
+      it "responds successfully with an HTTP 200 status code" do
+        get :index
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+      end
     end
 
-    assert_redirected_to links_path
+    describe "GET #show" do
+      it "responds successfully with an HTTP 200 status code" do
+        get :show
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+      end
+      it 'responds to slug and redirects' do
+        @link = Link.new(url:"http://www.google.com")
+        @link.save
+        @link.sluggify!
+        get :show, :slug => @link.slug
+        expect(response).to be_redirect
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    describe "GET #random_link" do
+      it "redirects to random URL" do
+        get :random_link
+        expect(response).to be_redirect
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    describe "GET #edit" do
+      it "responds successfully with an HTTP 200 status code" do
+        get :edit
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    describe "POST #create" do
+      it "responds successfully with an HTTP 302 status code" do
+        post :create, @link
+        expect(response).to be_redirect
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    describe "PUT #update" do
+      it "responds successfully with an HTTP 302 status code" do
+        put :update, @link
+        expect(response).to be_redirect
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    describe "DELETE #destroy" do
+      it "responds successfully with an HTTP 302 redirect code" do
+        delete :destroy, @link
+        expect(response).to be_redirect
+        expect(response).to have_http_status(302)
+      end
+    end
+
   end
 end
