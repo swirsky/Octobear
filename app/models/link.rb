@@ -15,7 +15,7 @@ class Link < ActiveRecord::Base
   end
 
   def get_slug
-    "#{base_url}/#{self.slug}"
+    "#{base_url}#{self.slug}"
   end
 
   def self.random_link
