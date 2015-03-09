@@ -36,7 +36,8 @@ div {
 }
 
 .container {
-  text-align: center
+  float: center;
+  text-align: center;
 }
 
 #notice {
@@ -44,12 +45,14 @@ div {
 }
 
 .field_with_errors {
+  margin: auto;
   padding: 2px;
   background-color: red;
   display: table;
 }
 
 #error_explanation {
+  margin: auto;
   width: 450px;
   border: 2px solid red;
   padding: 7px;
