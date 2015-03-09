@@ -1,5 +1,9 @@
+require 'uri'
+
 class Link < ActiveRecord::Base
-  
+  validates :url, :presence => true
+  validate :valid_uri?
+
   RANDOM_LINKS = ["dictionary.reference.com/browse/random",
                   "random.org", "en.wikipedia.org/wiki/Randomness",
                   "ruby-doc.org/core-2.2.0/Random.html"]
@@ -19,6 +23,12 @@ class Link < ActiveRecord::Base
   end
 
 private
+
+  def valid_uri?
+    !!URI.parse(self.url)
+  rescue URI::InvalidURIError
+    errors.add(:url, "Invalid URL")
+  end
 
   def base_url
     case Rails.env
