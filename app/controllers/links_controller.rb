@@ -14,11 +14,13 @@ class LinksController < ApplicationController
     if params[:slug]
       @link = Link.find_by(slug:params[:slug]).given_url
       redirect_to @link.url
-    elsif params[:random]
+    end
+  end
+
+  def random_link
       @link = Link.random_link
       puts "RANDOM: #{@link.inspect}"
       redirect_to @link
-    end
   end
 
   # GET /links/new
