@@ -25,9 +25,12 @@ class Link < ActiveRecord::Base
 private
 
   def valid_uri?
-    !!URI.parse(self.url)
+    uri = URI.parse(url)
+    unless uri.kind_of?(URI::HTTP) || uri.kind_of?(URI::HTTPS)
+     errors.add(:url, "Invalid URL.  Must be valid HTTP/S")
+    end
   rescue URI::InvalidURIError
-    errors.add(:url, "Invalid URL")
+    errors.add(:url, "Invalid URL.  Must be valid HTTP/S")
   end
 
   def base_url
