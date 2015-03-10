@@ -66,6 +66,14 @@ RSpec.describe LinksController, type: :controller do
         expect(response).to have_http_status(302)
         expect(Link.where(url:good_url)).not_to be_empty
       end
+      it '#create with user has user_id' do
+        user = sign_in(true)
+        post :create, link:{url:good_url, user_id:user.id}
+        expect(response).to be_redirect
+        expect(response).to have_http_status(302)
+        expect(Link.where(url:good_url)).not_to be_empty
+        expect(Link.where(user_id:user.id).count).to be > 0
+      end
       it "render new with bad data" do
         post :create, link:{url:bad_url}
         expect(response).to have_http_status(200)
