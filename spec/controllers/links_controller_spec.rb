@@ -26,15 +26,11 @@ RSpec.describe LinksController, type: :controller do
         expect(response).to have_http_status(200)
       end
       it 'responds to slug and redirects' do
-        @link = Link.new(url:"http://www.google.com")
-        @link.save
         get :show, :slug => @link.slug
         expect(response).to be_redirect
         expect(response).to have_http_status(302)
       end
       it 'responds to bad slug and redirects to root' do
-        @link = Link.new(url:"http://www.google.com")
-        @link.save
         get :show, :slug => "#{@link.slug}brokenlink"
         expect(response).to be_redirect
         expect(response).to have_http_status(302)
