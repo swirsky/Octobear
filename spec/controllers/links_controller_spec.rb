@@ -7,7 +7,7 @@ RSpec.describe LinksController, type: :controller do
     end
 
     describe "GET #index" do
-      it "responds successfully with an HTTP 200 status code" do
+      it "link#index redirects to home" do
         get :index
         expect(response).to be_redirect
         expect(response).to have_http_status(302)
