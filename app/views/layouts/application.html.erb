@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'></meta>
   <title>ShortUrl</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
- 
-  <div class='container'>
-    <%= yield %>
-  </div>
+  <table>
+    <tr>
+      <td class='navbar'>
+        <%= render 'layouts/navigation' %>
+      </td>
+
+      <td>
+        <div class='container'>
+          <p id='notice' class="notice"><%= notice %></p>
+          <p id='alert' class="alert"><%= alert %></p>
+          <%= yield %>
+        </div>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>

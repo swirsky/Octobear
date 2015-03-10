@@ -1,21 +1,22 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  # Devise confirms: 
+  #                 email: uniqueness, presence, and  validity
+  #                 password: presence, confirmation, length
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   include RoleModel
 
   attr_accessor :password, :salt
-  EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
-  validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
   validates :password, :confirmation => true #password_confirmation attr
-  validates_length_of :password, :in => 6..20, :on => :create
 
   before_save :encrypt_password
-  after_save :clear_password_attr
+  before_save :set_roles_mask
+  after_save :clear_password
 
-  roles_attibute :roles_mask
+  roles_attribute :roles_mask
   #roles
   roles :admin, :client
 
@@ -31,5 +32,10 @@ class User < ActiveRecord::Base
   def clear_password
     self.salt = nil
     self.password = nil
+  end
+
+  def set_roles_mask
+    #only one role presently
+    self.roles = [:client]
   end
 end

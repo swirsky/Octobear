@@ -15,4 +15,6 @@
  *= require bootstrap.min
  */
 
-
+td.navbar{
+  width:20%
+}
