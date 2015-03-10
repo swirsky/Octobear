@@ -55,10 +55,17 @@ RSpec.describe LinksController, type: :controller do
     end
 
     describe "POST #create" do
+      good_url = "http://www.special.com"
+      bad_url = "I am a website"
       it "responds successfully with an HTTP 302 status code" do
-        post :create, id:@link.id, link:@link.attributes
+        post :create, link:{url:good_url}
         expect(response).to be_redirect
         expect(response).to have_http_status(302)
+        expect(Link.where(url:good_url)).not_to be_empty
+      end
+      it "render new with bad data" do
+        post :create, link:{url:bad_url}
+        expect(response).to have_http_status(200)
       end
     end
 

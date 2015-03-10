@@ -40,7 +40,6 @@ class LinksController < ApplicationController
     @link = Link.new(link_params)
     respond_to do |format|
       if @link.save
-        @link.reload
         format.html { redirect_to @link, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
       else
