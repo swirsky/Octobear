@@ -12,6 +12,11 @@ RSpec.describe LinksController, type: :controller do
         expect(response).to be_redirect
         expect(response).to have_http_status(302)
       end
+      it "handles random links and redirects" do
+        get :index, :random => true
+        expect(response).to be_redirect
+        expect(response).to have_http_status(302)
+      end
     end
 
     describe "GET #show" do
@@ -36,14 +41,6 @@ RSpec.describe LinksController, type: :controller do
         expect(flash[:notice]).to be_present
       end
 
-    end
-
-    describe "GET #random_link" do
-      it "redirects to random URL" do
-        get :show, :random_link => true
-        expect(response).to be_redirect
-        expect(response).to have_http_status(302)
-      end
     end
 
     describe "GET #edit" do

@@ -4,13 +4,16 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    redirect_to :root
+    if params[:random]
+      redirect_to Link.random_link
+    else
+      redirect_to :root
+    end
   end
 
   # GET /links/1
   # GET /links/1.json
   def show
-    set_link if params[:id]
     if params[:slug]
       @link = Link.find_by(slug:params[:slug])
       if @link
@@ -20,9 +23,8 @@ class LinksController < ApplicationController
         flash[:notice] = "That slug does not exist"
         redirect_to :root
       end
-    elsif params[:random_link]
-      redirect_to Link.random_link
     end
+    set_link if params[:id]
   end
 
   # GET /links/new
