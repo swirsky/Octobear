@@ -63,6 +63,7 @@ RSpec.describe LinksController, type: :controller do
       it "render new with bad data" do
         post :create, link:{url:bad_url}
         expect(response).to have_http_status(200)
+        expect(response).to render_template("new")
       end
     end
 
