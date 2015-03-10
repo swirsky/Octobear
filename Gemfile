@@ -23,8 +23,11 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+#testing
 gem 'rspec'
 gem 'rspec-rails'
+gem 'factory_girl'
+gem 'factory_girl_rails'
 
 #devise for user login
 gem 'devise'

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Link, type: :model do
   it "good link gets created and slugged" do
-      @link = Link.new(url:"http://www.google.com")
+      @link = Link.new(url:'http://www.google.com')
       expect(@link.slug).to eq nil
       @link.save
       expect(@link.slug).to_not eq nil
@@ -10,7 +10,7 @@ RSpec.describe Link, type: :model do
     end
 
   it "bad url does not get saved" do
-    @link = Link.new(url:"I am totally a link I swear just trust me")
+    @link = Link.new(url:"wobsite")
     expect(@link.save).to eq false
   end
 

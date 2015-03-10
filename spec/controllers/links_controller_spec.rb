@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe LinksController, type: :controller do
     before :all do
-      @link = Link.new(url:"http://www.google.com")
-      @link.save
+      @link = create(:link)
     end
 
     after :all do
