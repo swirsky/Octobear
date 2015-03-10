@@ -1,6 +1,8 @@
 require 'uri'
 
 class Link < ActiveRecord::Base
+  belongs_to :user
+
   validates :url, :presence => true
   validate :valid_uri?
   after_save :sluggify!

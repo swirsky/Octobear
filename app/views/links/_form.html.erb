@@ -15,6 +15,11 @@
     <%= f.label :url %><br>
     <%= f.text_field :url %>
   </div>
+
+  <% if current_user %>
+    <%= f.hidden_field :user_id, value:current_user.id %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

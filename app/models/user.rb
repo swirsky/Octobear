@@ -9,15 +9,17 @@ class User < ActiveRecord::Base
 
   include RoleModel
 
+  has_many :links
+  
+  #password stuff / account setup
   attr_accessor :password, :salt
   validates :password, :confirmation => true #password_confirmation attr
-
   before_save :encrypt_password
   before_save :set_roles_mask
   after_save :clear_password
 
+  #role model
   roles_attribute :roles_mask
-  #roles
   roles :admin, :client
 
   private
