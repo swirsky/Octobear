@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
   resources :links
-  get 'random_link', to: 'links#random_link', :as => 'random_link'
+  get ':random_link', to: 'links#show'
   get ':slug' => 'links#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

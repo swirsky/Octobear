@@ -13,13 +13,16 @@ class LinksController < ApplicationController
     set_link if params[:id]
     if params[:slug]
       @link = Link.find_by(slug:params[:slug])
-      redirect_to @link.url if @link
+      if @link
+        redirect_to @link.url
+      else
+        #no matching slug, redirect to root
+        flash[:notice] = "That slug does not exist"
+        redirect_to :root
+      end
+    elsif params[:random_link]
+      redirect_to Link.random_link
     end
-  end
-
-  def random_link
-      @link = Link.random_link
-      redirect_to @link
   end
 
   # GET /links/new
@@ -35,9 +38,9 @@ class LinksController < ApplicationController
   # POST /links.json
   def create
     @link = Link.new(link_params)
-    @link.sluggify! if @link.save
     respond_to do |format|
       if @link.save
+        @link.reload
         format.html { redirect_to @link, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
       else

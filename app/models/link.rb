@@ -3,17 +3,13 @@ require 'uri'
 class Link < ActiveRecord::Base
   validates :url, :presence => true
   validate :valid_uri?
+  after_save :sluggify!
 
   RANDOM_LINKS = ["dictionary.reference.com/browse/random",
                   "random.org", "en.wikipedia.org/wiki/Randomness",
                   "ruby-doc.org/core-2.2.0/Random.html"]
   RANDOM_AMOUNT = RANDOM_LINKS.count
   
-  def sluggify!
-    self.slug = (self.id+20).to_s(20)
-    self.save
-  end
-
   def get_slug
     "#{base_url}#{self.slug}"
   end
@@ -23,6 +19,13 @@ class Link < ActiveRecord::Base
   end
 
 private
+
+  def sluggify!
+    #need to reload object to get ID
+    self.update_column(:slug, (self.id+20).to_s(20))
+  rescue
+    errors.add(:slug, "Slug could not be generated")
+  end
 
   def valid_uri?
     uri = URI.parse(url)
