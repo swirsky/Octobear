@@ -6,6 +6,10 @@ RSpec.describe LinksController, type: :controller do
       @link.save
     end
 
+    after :all do
+      kill_user if @user
+    end
+
     describe "GET #index" do
       it "link#index redirects to home" do
         get :index
@@ -16,6 +20,12 @@ RSpec.describe LinksController, type: :controller do
         get :index, :random => true
         expect(response).to be_redirect
         expect(response).to have_http_status(302)
+      end
+      it "link#index with user ID shows user's links" do
+        sign_in(true, extra_params:{add_links:true})
+        get :index
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
       end
     end
 

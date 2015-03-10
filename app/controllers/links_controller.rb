@@ -6,6 +6,8 @@ class LinksController < ApplicationController
   def index
     if params[:random]
       redirect_to Link.random_link
+    elsif current_user
+      @links = current_user.links
     else
       redirect_to :root
     end
