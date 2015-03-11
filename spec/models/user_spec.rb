@@ -14,4 +14,13 @@ RSpec.describe User, type: :model do
     end
   end
 
+  it 'valid user saves and gets callbacks' do
+    u = User.new(email:"valid@test.com", password:"password")
+    expect(u.save).to eq true
+    expect(u.password).to be nil
+    expect(u.salt).to be nil
+    expect(u.encrypted_password).to_not be nil
+    expect(u.roles_mask).to_not be nil
+  end
+
 end
