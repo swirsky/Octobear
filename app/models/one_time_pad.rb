@@ -37,6 +37,27 @@ class OneTimePad < ActiveRecord::Base
     end
   end
 
+  def blockify_input
+    str = ""
+    self.number_of_keys.times do |i|
+      line = self.input[(5*i)..((5*i)+self.line_length-1)]
+      str += "#{line.scan(/.{5}|.+/).join(" ")}\n"
+    end
+    blockify(str)
+  end
+
+  def blockify_cypher
+    blockify(self.cypher)
+  end
+
+  def blockify_output
+    blockify(self.output)
+  end
+
+
+  def blockify(string)
+    return string.gsub(/\n/, '<br>')
+  end
 
   private
 
