@@ -1,0 +1,38 @@
+<%= form_for(@one_time_pad) do |f| %>
+  <% if @one_time_pad.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@one_time_pad.errors.count, "error") %> prohibited this one_time_pad from being saved:</h2>
+
+      <ul>
+      <% @one_time_pad.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :input %><br>
+    <%= f.text_field :input %>
+  </div>
+
+  <%= f.hidden_field :user_id, value:@user.id %><br>
+
+<% if false %>
+  <div class="field">
+    <%= f.label :line_length %><br>
+    <%= f.number_field :line_length %>
+  </div>
+  <div class="field">
+    <%= f.label :group_length %><br>
+    <%= f.number_field :group_length %>
+  </div>
+  <div class="field">
+    <%= f.label :key_length %><br>
+    <%= f.number_field :key_length %>
+  </div>
+<% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

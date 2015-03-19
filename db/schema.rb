@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310213544) do
+ActiveRecord::Schema.define(version: 20150319195047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,22 @@ ActiveRecord::Schema.define(version: 20150310213544) do
   end
 
   add_index "links", ["slug"], name: "index_links_on_slug", unique: true, using: :btree
+
+  create_table "one_time_pads", force: :cascade do |t|
+    t.string   "input",                                 null: false
+    t.string   "cypher",                                null: false
+    t.string   "output",                                null: false
+    t.integer  "line_length",              default: 25, null: false
+    t.integer  "group_length",             default: 5,  null: false
+    t.integer  "number_of_keys",                        null: false
+    t.integer  "key_length",               default: 25, null: false
+    t.integer  "seed",           limit: 8,              null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "user_id",                               null: false
+  end
+
+  add_index "one_time_pads", ["user_id"], name: "index_one_time_pads_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "firstname"
