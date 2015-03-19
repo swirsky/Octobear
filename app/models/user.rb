@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   include RoleModel
 
   has_many :links
+  has_many :one_time_pads
   
   #password stuff / account setup
   attr_accessor :password, :salt

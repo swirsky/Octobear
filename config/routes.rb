@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :one_time_pads
+
   #resources :users
 
   root 'home#index'
@@ -6,6 +8,8 @@ Rails.application.routes.draw do
   get ':slug' => 'links#show'
 
   Rails.application.routes.draw do
+  resources :one_time_pads
+
       devise_for :users, controllers: {
         sessions: 'users/sessions'
       }

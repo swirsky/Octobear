@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Input:</strong>
+  <%= @one_time_pad.input %>
+</p>
+
+<p>
+  <strong>Cypher:</strong>
+  <%= @one_time_pad.cypher %>
+</p>
+
+<p>
+  <strong>Output:</strong>
+  <%= @one_time_pad.output %>
+</p>
+
+<p>
+  <strong>Line length:</strong>
+  <%= @one_time_pad.line_length %>
+</p>
+
+<p>
+  <strong>Group length:</strong>
+  <%= @one_time_pad.group_length %>
+</p>
+
+<p>
+  <strong>Number of keys:</strong>
+  <%= @one_time_pad.number_of_keys %>
+</p>
+
+<p>
+  <strong>Key length:</strong>
+  <%= @one_time_pad.key_length %>
+</p>
+
+<%= link_to 'Edit', edit_one_time_pad_path(@one_time_pad) %> |
+<%= link_to 'Back', one_time_pads_path %>
