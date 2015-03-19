@@ -40,7 +40,7 @@ class OneTimePad < ActiveRecord::Base
   def blockify_input
     str = ""
     self.number_of_keys.times do |i|
-      line = self.input[(5*i)..((5*i)+self.line_length-1)]
+      line = self.input[(self.line_length*i)..((self.line_length*i)+self.line_length-1)]
       str += "#{line.scan(/.{5}|.+/).join(" ")}\n"
     end
     blockify(str)
