@@ -71,6 +71,6 @@ class TranspositionCiphersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transposition_cipher_params
-      params.require(:transposition_cipher).permit(:input, :user_id, :keyword)
+      params.require(:transposition_cipher).permit(:input, :user_id, :keyword, :output_line_length)
     end
 end

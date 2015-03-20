@@ -9,19 +9,24 @@ class TranspositionCipher < ActiveRecord::Base
     self.keyword.length
   end
 
-  def blockify_input(string=false)
-    if string
+  def blockify_input(params={})
+    if params[:string]
       super(self.set_input_groups(self.line_length))
     else
     formatted_blockify(self.set_input_groups(self.line_length))
     end
   end
 
-  def blockify_output(string=false)
-    if string
+  def blockify_output(params={})
+    if params[:string]
       super
     else
-      formatted_blockify(self.transpose_groups)
+      transposed = self.transpose_groups
+      code = ""
+      transposed.each do |t|
+        code += t.strip
+      end
+      formatted_blockify(code.scan(/.{#{self.output_line_length}}|.+/))
     end
   end
 
@@ -30,8 +35,6 @@ class TranspositionCipher < ActiveRecord::Base
     transposed = []
     keys = key_order
     keys.each_pair do |order, loc|
-      puts keys.inspect
-      puts groups.inspect
       str = ""
       groups.each do |g|
         str << (g[loc].nil? ? " " : g[loc])
@@ -47,6 +50,11 @@ class TranspositionCipher < ActiveRecord::Base
     sanitize_input
     groups = transpose_groups
     self.output = ""
+    code = ""
+    groups.each do |t|
+      code += t.strip
+    end
+    groups = code.scan(/.{#{self.output_line_length}}|.+/)
     groups.each do |g|
       self.output << "#{g}\n"
     end

@@ -49,7 +49,7 @@ module CryptoHelper
     blockify(blocker)
   end
 
-  def blockify_output(string=true)
+  def blockify_output(params={})
     blockify(self.output)
   end
 

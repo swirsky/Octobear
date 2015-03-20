@@ -8,8 +8,8 @@ class OneTimePad < ActiveRecord::Base
 
   attr_accessor :number_of_lines
 
-  def blockify_input(string=false)
-    if string
+  def blockify_input(params={})
+    if params[:string]
       str = ""
       number_of_lines.times do |i|
         line = self.input[(self.line_length*i)..((self.line_length*i)+self.line_length-1)]

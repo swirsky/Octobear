@@ -1,11 +1,11 @@
 <p>
 <strong>Input:</strong></br>
-  <%= raw @one_time_pad.blockify_input %>
+<%= raw @one_time_pad.blockify_input %>
 </p>
 
 <p>
 <strong>Cypher:</strong></br>
-  <%= raw @one_time_pad.blockify_cypher %>
+<%= raw @one_time_pad.blockify_cypher %>
 </p>
 
 <p>
@@ -41,13 +41,13 @@
     <strong>Input:</strong>
     <blockquote>
       <p>
-        <%= raw @one_time_pad.blockify_input(string:true) %>
+      <%= raw @one_time_pad.blockify_input({string:true}) %>
       </p>
     </blockquote>
     <strong>Cypher:</strong>
     <blockquote>
       <p>
-        <%= raw @one_time_pad.blockify_cypher(string:true) %>
+      <%= raw @one_time_pad.blockify_cypher({string:true}) %>
       </p>
     </blockquote>
     <strong>Output:</strong>
