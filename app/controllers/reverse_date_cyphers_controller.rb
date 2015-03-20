@@ -70,6 +70,6 @@ class ReverseDateCyphersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reverse_date_cypher_params
-      params.require(:reverse_date_cypher).permit(:input, :user_id, :date_year, :date_month, :date_day)
+      params.require(:reverse_date_cypher).permit(:input, :user_id, :date_cypher, :date_year, :date_month, :date_day)
     end
 end

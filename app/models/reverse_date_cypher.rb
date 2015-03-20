@@ -29,7 +29,7 @@ class ReverseDateCypher < ActiveRecord::Base
 
   def encrypt_line(line, cypher)
     e_l = ""
-    line.chars.each do |c|
+    line.chars.reverse.each do |c|
       if c.blank?
         e_l << " "
       else
@@ -46,7 +46,7 @@ class ReverseDateCypher < ActiveRecord::Base
   end
 
   def set_date_cypher
-    self.date_cypher = ((self.date_year + self.date_month)%26 + self.date_day)%26
+    self.date_cypher ||= ((self.date_year + self.date_month)%26 + self.date_day)%26
   end
 
 end
