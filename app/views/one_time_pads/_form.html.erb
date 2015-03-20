@@ -18,7 +18,6 @@
 
   <%= f.hidden_field :user_id, value:@user.id %><br>
 
-<% if false %>
   <div class="field">
     <%= f.label :line_length %><br>
     <%= f.number_field :line_length %>
@@ -31,7 +30,10 @@
     <%= f.label :key_length %><br>
     <%= f.number_field :key_length %>
   </div>
-<% end %>
+  <div class="field">
+    <%= f.label :number_of_keys %><br>
+    <%= f.number_field :number_of_keys %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

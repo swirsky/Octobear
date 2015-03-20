@@ -73,6 +73,6 @@ class OneTimePadsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def one_time_pad_params
-      params.require(:one_time_pad).permit(:input, :user_id, :line_length, :group_length, :key_length)
+      params.require(:one_time_pad).permit(:input, :user_id, :line_length, :group_length, :key_length, :number_of_keys)
     end
 end

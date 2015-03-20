@@ -5,21 +5,14 @@ class OneTimePad < ActiveRecord::Base
   validates_presence_of :input
 
   before_save :generate_output
-=begin
-  def initialize(attributes={})
-    @input = attributes[:input].gsub(/\W+/, "")
-    @key_length = attributes[:key_length] ? attributes[:key_length] : 25
-    @group_length = attributes[:group_length] ? attributes[:group_length] : 5
-    @line_length = attributes[:line_length] ? attributes[:line_length] : 25
-    @number_of_keys = (@input.length/@line_length).to_i + 1
-  end
-=end
+
+  attr_accessor :number_of_lines
 
   def blockify_input
     str = ""
-    self.number_of_keys.times do |i|
+    number_of_lines.times do |i|
       line = self.input[(self.line_length*i)..((self.line_length*i)+self.line_length-1)]
-      str += "#{line.scan(/.{5}|.+/).join(" ")}\n"
+      str += "#{line.scan(/.{#{self.group_length}}|.+/).join(" ")}\n"
     end
     blockify(str)
   end
@@ -28,26 +21,26 @@ class OneTimePad < ActiveRecord::Base
     blockify(self.cypher)
   end
 
-  def blockify_output
-    blockify(self.output)
+  def number_of_lines
+    (self.input.length/self.line_length).to_i + 1
   end
 
   private
 
     def generate_output
       sanitize_input
-      self.key_length = attributes[:key_length] ? attributes[:key_length] : 25
-      self.group_length = attributes[:group_length] ? attributes[:group_length] : 5
-      self.line_length = attributes[:line_length] ? attributes[:line_length] : 25
-      self.number_of_keys = (self.input.length/self.line_length).to_i + 1
+      self.key_length = self.key_length ? self.key_length : 25
+      self.group_length = self.group_length ? self.group_length : 5
+      self.line_length = self.line_length ? self.line_length : 25
+      self.number_of_keys = self.number_of_keys ? self.number_of_keys : (self.input.length/self.line_length).to_i + 1
       self.output = ""
       self.cypher = ""
       input_groups = get_input_groups
+      keys = generate_keys
       self.number_of_keys.times do |i|
         puts "Starting cypher loop at #{i}"
-        key = generate_key
-        self.cypher += "#{key.scan(/.{5}|.+/).join(" ")}\n"
-        self.output += "#{encrypt(input_groups[i], key)}\n"
+        self.cypher += "#{keys[i].scan(/.{#{self.group_length}}|.+/).join(" ")}\n"
+        self.output += "#{encrypt(input_groups[i], keys[i])}\n" if input_groups[i]
       end
     end
 
@@ -67,10 +60,18 @@ class OneTimePad < ActiveRecord::Base
       key
     end
 
+    def generate_keys
+      keys = []
+      self.number_of_keys.times do |i|
+        keys << generate_key
+      end
+      keys
+    end
+
     def encrypt(string, key)
       output_str = ""
       string.length.times do |i|
-        if i != 0 && i != self.line_length && i%5 == 0
+        if i != 0 && i != self.line_length && i%self.group_length == 0
           output_str += " "
         end
         puts "================"
@@ -89,7 +90,6 @@ class OneTimePad < ActiveRecord::Base
       self.number_of_keys.times do |i|
         groups << self.input[(self.line_length*(i))..((self.line_length*(i))+self.line_length-1)]
       end
-      puts groups.inspect
       groups
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320043935) do
+ActiveRecord::Schema.define(version: 20150320055901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20150320043935) do
     t.string   "output",                                null: false
     t.integer  "line_length",              default: 25, null: false
     t.integer  "group_length",             default: 5,  null: false
-    t.integer  "number_of_keys",                        null: false
+    t.integer  "number_of_keys",           default: 1,  null: false
     t.integer  "key_length",               default: 25, null: false
     t.integer  "seed",           limit: 8,              null: false
     t.datetime "created_at",                            null: false
