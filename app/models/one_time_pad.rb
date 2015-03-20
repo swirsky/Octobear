@@ -1,17 +1,9 @@
 class OneTimePad < ActiveRecord::Base
-
+  include CryptoHelper
   belongs_to :user
 
   validates_presence_of :input
-  ALPHABET = %w(A B C D E F G H I K L M N O P Q R S T U V W X Y Z)
-  ALPHA_LOOKUP = ALPHABET.inject({}) do |hash, letter| 
-                                          hash[hash.count] = letter
-                                          hash
-                                     end
-  ALPH_TO_NUM = ALPHABET.inject({}) do |hash, letter|
-                                          hash[letter] = hash.count
-                                          hash
-                                     end
+
   before_save :generate_output
 =begin
   def initialize(attributes={})
@@ -22,20 +14,6 @@ class OneTimePad < ActiveRecord::Base
     @number_of_keys = (@input.length/@line_length).to_i + 1
   end
 =end
-  def self.generate_alpha_lookup
-    result = {}
-    ALPHABET.times do |i|
-      result[i] = ALPHABET[i]
-    end
-    result
-  end
-
-  def self.generate_alpha_to_num
-    result = {}
-    ALPHABET.times do |i|
-      result[ALPHABET[i]] = i
-    end
-  end
 
   def blockify_input
     str = ""
@@ -52,11 +30,6 @@ class OneTimePad < ActiveRecord::Base
 
   def blockify_output
     blockify(self.output)
-  end
-
-
-  def blockify(string)
-    return string.gsub(/\n/, '<br>')
   end
 
   private
@@ -80,6 +53,7 @@ class OneTimePad < ActiveRecord::Base
 
     def sanitize_input
       self.input.gsub!(/\W+/, "")
+      self.input.gsub!(/(0-9|_)/, "")
       self.input.gsub!("J", "I")
       self.input.upcase!
     end
@@ -88,7 +62,7 @@ class OneTimePad < ActiveRecord::Base
       self.seed = (Time.now.to_f*100000).to_i
       key = ""
       self.key_length.times do |i|
-        key += ALPHA_LOOKUP[rand(seed)%25]
+        key += ALPHA25_LOOKUP[rand(seed)%25]
       end
       key
     end
@@ -105,7 +79,7 @@ class OneTimePad < ActiveRecord::Base
         puts "string: #{string}"
         puts "key: #{key}"
         puts "==============="
-        output_str += ALPHA_LOOKUP[(ALPH_TO_NUM[string[i]] + ALPH_TO_NUM[key[i]])%25]
+        output_str += ALPHA25_LOOKUP[(ALPHA25_TO_NUM[string[i]] + ALPHA25_TO_NUM[key[i]])%25]
       end
       output_str
     end

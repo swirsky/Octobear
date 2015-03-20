@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :reverse_date_cyphers
+
   resources :one_time_pads
 
   #resources :users
@@ -8,6 +10,8 @@ Rails.application.routes.draw do
   get ':slug' => 'links#show'
 
   Rails.application.routes.draw do
+  resources :reverse_date_cyphers
+
   resources :one_time_pads
 
       devise_for :users, controllers: {
