@@ -1,0 +1,26 @@
+<%= form_for(@rot_cypher) do |f| %>
+  <% if @rot_cypher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rot_cypher.errors.count, "error") %> prohibited this rot_cypher from being saved:</h2>
+
+      <ul>
+      <% @rot_cypher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :input %><br>
+    <%= f.text_area :input %>
+  </div>
+  <%= f.hidden_field :user_id, value:@user.id %><br>
+  <div class="field">
+    <%= f.label :rot %><br>
+    <%= f.number_field :rot %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

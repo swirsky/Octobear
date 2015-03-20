@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :rot_cyphers
+
   resources :reverse_date_cyphers
 
   resources :one_time_pads
@@ -10,6 +12,8 @@ Rails.application.routes.draw do
   get ':slug' => 'links#show'
 
   Rails.application.routes.draw do
+  resources :rot_cyphers
+
   resources :reverse_date_cyphers
 
   resources :one_time_pads

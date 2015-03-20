@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+<strong>Input:</strong><br />
+  <%= raw @rot_cypher.blockify_input %>
+</p>
+
+<p>
+  <strong>Rot:</strong>
+  <%= @rot_cypher.rot %>
+</p>
+
+<p>
+<strong>Output:</strong><br/>
+  <%= raw @rot_cypher.blockify_output %>
+</p>
+
+<%= link_to 'Edit', edit_rot_cypher_path(@rot_cypher) %> |
+<%= link_to 'Back', rot_cyphers_path %>

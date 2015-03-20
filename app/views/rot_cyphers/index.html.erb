@@ -1,0 +1,29 @@
+<h1>Listing Rot Cyphers</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Input</th>
+      <th>Rot</th>
+      <th>Output</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rot_cyphers.each do |rot_cypher| %>
+      <tr>
+        <td><%= rot_cypher.input[0..15] %></td>
+        <td><%= rot_cypher.rot %></td>
+        <td><%= rot_cypher.output[0..15] %></td>
+        <td><%= link_to 'Show', rot_cypher %></td>
+        <td><%= link_to 'Edit', edit_rot_cypher_path(rot_cypher) %></td>
+        <td><%= link_to 'Destroy', rot_cypher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rot cypher', new_rot_cypher_path %>
