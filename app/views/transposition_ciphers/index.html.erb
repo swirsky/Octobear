@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Transposition Ciphers</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Input</th>
+      <th>Keyword</th>
+      <th>Output</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transposition_ciphers.each do |transposition_cipher| %>
+      <tr>
+        <td><%= transposition_cipher.input[0..15] %></td>
+        <td><%= transposition_cipher.keyword %></td>
+        <td><%= transposition_cipher.output[0..15] %></td>
+        <td><%= link_to 'Show', transposition_cipher %></td>
+        <td><%= link_to 'Edit', edit_transposition_cipher_path(transposition_cipher) %></td>
+        <td><%= link_to 'Destroy', transposition_cipher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Transposition cipher', new_transposition_cipher_path %>

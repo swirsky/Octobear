@@ -1,11 +1,13 @@
 class RotCypher < ActiveRecord::Base
   include CryptoHelper
 
+  belongs_to :user
+
   before_save :encrypt_message
 
   LINE_LENGTH = 25
 
-  def get_line_length
+  def line_length
     LINE_LENGTH
   end
 

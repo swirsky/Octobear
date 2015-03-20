@@ -8,21 +8,64 @@ class OneTimePad < ActiveRecord::Base
 
   attr_accessor :number_of_lines
 
-  def blockify_input
-    str = ""
-    number_of_lines.times do |i|
-      line = self.input[(self.line_length*i)..((self.line_length*i)+self.line_length-1)]
-      str += "#{line.scan(/.{#{self.group_length}}|.+/).join(" ")}\n"
+  def blockify_input(string=false)
+    if string
+      str = ""
+      number_of_lines.times do |i|
+        line = self.input[(self.line_length*i)..((self.line_length*i)+self.line_length-1)]
+        str += "#{line.scan(/.{#{self.group_length}}|.+/).join(" ")}\n"
+      end
+      blockify(str)
+    else
+      self.formatted_blockify(self.get_lines)
     end
-    blockify(str)
   end
 
-  def blockify_cypher
-    blockify(self.cypher)
+  def blockify_output(string=false)
+    if string
+      super
+    else
+      self.formatted_blockify(self.get_encoded_lines)
+    end
+  end
+
+  def blockify_cypher(string=false)
+    if string
+      self.blockify(cypher)
+    else
+      self.formatted_blockify(self.get_cypher_lines)
+    end
   end
 
   def number_of_lines
     (self.input.length/self.line_length).to_i + 1
+  end
+
+  def get_lines
+    lines = []
+    number_of_lines.times do |i|
+      line = self.input[(self.line_length*i)..((self.line_length*i)+self.line_length-1)]
+      lines << "#{line.scan(/.{#{self.group_length}}|.+/).join(" ")}"
+    end
+    lines
+  end
+
+  def get_cypher_lines
+    lines = []
+    number_of_keys.times do |i|
+      line = self.cypher.gsub(' ', '')[(self.line_length*i)..((self.line_length*i)+self.line_length-1)]
+      lines << "#{line.scan(/.{#{self.group_length}}|.+/).join(" ")}"
+    end
+    lines
+  end
+
+  def get_encoded_lines
+    lines = []
+    number_of_lines.times do |i|
+      line = self.output.gsub(' ', '')[(self.line_length*i)..((self.line_length*i)+self.line_length-1)]
+      lines << "#{line.scan(/.{#{self.group_length}}|.+/).join(" ")}"
+    end
+    lines
   end
 
   private

@@ -33,5 +33,28 @@
   <%= @one_time_pad.key_length %>
 </p>
 
+<div class="panel-group" id="paste_dropdown">
+  <div class='panel-heading'>
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#paste_dropdown" href="#paste_boxes">Get Pastable Text</a>
+  </div>
+  <div class="panel-collapse collapse" id="paste_boxes">
+    <blockquote>
+      <p>
+        <%= raw @one_time_pad.blockify_input(string:true) %>
+      </p>
+    </blockquote>
+    <blockquote>
+      <p>
+        <%= raw @one_time_pad.blockify_cypher(string:true) %>
+      </p>
+    </blockquote>
+    <blockquote>
+      <p>
+        <%= raw @one_time_pad.blockify_output(string:true) %>
+      </p>
+    </blockquote>
+  </div>
+</div>
+
 <%= link_to 'Edit', edit_one_time_pad_path(@one_time_pad) %> |
 <%= link_to 'Back', one_time_pads_path %>

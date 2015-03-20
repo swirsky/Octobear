@@ -1,0 +1,35 @@
+<p>
+<strong>Input:</strong><br />
+<p class='text'><%= raw @transposition_cipher.blockify_input %></p>
+</p>
+
+<p>
+  <strong>Keyword:</strong>
+  <%= @transposition_cipher.keyword %>
+</p>
+
+<p>
+<strong>Output:</strong><br />
+<p class='text'><%= raw @transposition_cipher.blockify_output %></p>
+</p>
+
+<div class="panel-group" id="paste_dropdown">
+  <div class='panel-heading'>
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#paste_dropdown" href="#paste_boxes">Get Pastable Text</a>
+  </div>
+  <div class="panel-collapse collapse" id="paste_boxes">
+    <blockquote>
+      <p>
+        <%= raw @transposition_cipher.blockify_input(string:true) %>
+      </p>
+    </blockquote>
+    <blockquote>
+      <p>
+        <%= raw @transposition_cipher.blockify_output(string:true) %>
+      </p>
+    </blockquote>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_transposition_cipher_path(@transposition_cipher) %> |
+<%= link_to 'Back', transposition_ciphers_path %>

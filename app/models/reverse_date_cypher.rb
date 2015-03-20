@@ -11,7 +11,7 @@ class ReverseDateCypher < ActiveRecord::Base
 
   before_save :encrypt_message
 
-  def get_line_length
+  def line_length
     LINE_LENGTH
   end
 

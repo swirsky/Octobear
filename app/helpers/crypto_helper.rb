@@ -36,8 +36,12 @@ module CryptoHelper
     groups
   end
 
-  def blockify_input
-    input_groups = set_input_groups(self.get_line_length)
+  def blockify_input(input_groups=nil)
+    basic_blockify(input_groups)    
+  end
+
+  def basic_blockify(input_groups=nil)
+    input_groups = set_input_groups(self.line_length) unless input_groups
     blocker = ""
     input_groups.each do |g|
       blocker << "#{g}\n"
@@ -45,9 +49,28 @@ module CryptoHelper
     blockify(blocker)
   end
 
-  def blockify_output
+  def blockify_output(string=true)
     blockify(self.output)
   end
 
+  def formatted_blockify(input_groups)
+    blocker = "<table class='text-center'><thead><tr>"
+    input_groups.first.length.times do |i|
+      blocker += "<th style='width:1em;'></th>"
+    end
+    blocker += "</tr></thead><tbody>"
+    input_groups.each do |g|
+      blocker += "<tr'>#{rowifier(g)}</tr>"
+    end
+    blocker += "</tbody></table>"
+    blockify(blocker)
+  end
 
+  def rowifier(row)
+    str = ""
+    row.chars.each do |c|
+      str += "<td>#{c}</td>"
+    end
+    str
+  end
 end
