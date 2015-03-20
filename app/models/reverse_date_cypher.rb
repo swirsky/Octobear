@@ -11,17 +11,8 @@ class ReverseDateCypher < ActiveRecord::Base
 
   before_save :encrypt_message
 
-  def blockify_input
-    input_groups = set_input_groups
-    blocker = ""
-    input_groups.each do |g|
-      blocker << "#{g}\n"
-    end
-    blockify(blocker)
-  end
-
-  def blockify_output
-    blockify(self.output)
+  def get_line_length
+    LINE_LENGTH
   end
 
   private
@@ -29,7 +20,7 @@ class ReverseDateCypher < ActiveRecord::Base
   def encrypt_message
     set_date_cypher
     sanitize_input
-    input_groups = set_input_groups
+    input_groups = set_input_groups(LINE_LENGTH)
     self.output = ""
     input_groups.each do |g|
       self.output << "#{encrypt_line(g, self.date_cypher)}\n"
@@ -56,14 +47,6 @@ class ReverseDateCypher < ActiveRecord::Base
 
   def set_date_cypher
     self.date_cypher = ((self.date_year + self.date_month)%26 + self.date_day)%26
-  end
-
-  def set_input_groups
-    groups = []
-    ((self.input.length/LINE_LENGTH)+1).times do |i|
-      groups << self.input[(i*LINE_LENGTH)..((i*LINE_LENGTH)+LINE_LENGTH-1)]
-    end
-    groups
   end
 
 end

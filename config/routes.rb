@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :v_square_cyphers
+
   resources :rot_cyphers
 
   resources :reverse_date_cyphers
@@ -12,6 +14,8 @@ Rails.application.routes.draw do
   get ':slug' => 'links#show'
 
   Rails.application.routes.draw do
+  resources :v_square_cyphers
+
   resources :rot_cyphers
 
   resources :reverse_date_cyphers

@@ -1,0 +1,29 @@
+<h1>Listing V Square Cyphers</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Input</th>
+      <th>Output</th>
+      <th>Codeword</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @v_square_cyphers.each do |v_square_cypher| %>
+      <tr>
+        <td><%= v_square_cypher.input[0..15] %></td>
+        <td><%= v_square_cypher.output[0..15] %></td>
+        <td><%= v_square_cypher.codeword %></td>
+        <td><%= link_to 'Show', v_square_cypher %></td>
+        <td><%= link_to 'Edit', edit_v_square_cypher_path(v_square_cypher) %></td>
+        <td><%= link_to 'Destroy', v_square_cypher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New V square cypher', new_v_square_cypher_path %>

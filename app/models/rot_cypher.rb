@@ -5,24 +5,15 @@ class RotCypher < ActiveRecord::Base
 
   LINE_LENGTH = 25
 
-  def blockify_input
-    input_groups = set_input_groups
-    blocker = ""
-    input_groups.each do |g|
-      blocker << "#{g}\n"
-    end
-    blockify(blocker)
-  end
-
-  def blockify_output
-    blockify(self.output)
+  def get_line_length
+    LINE_LENGTH
   end
 
   private
 
   def encrypt_message
     sanitize_input!
-    groups = set_input_groups
+    groups = set_input_groups(LINE_LENGTH)
     self.output = ""
     groups.each do |g|
       self.output += "#{encrypt_line(g)}\n"
@@ -44,13 +35,5 @@ class RotCypher < ActiveRecord::Base
 
   def sanitize_input!
     self.input.upcase!
-  end
-
-  def set_input_groups
-   groups = []
-   ((self.input.length/LINE_LENGTH)+1).times do |i|
-     groups << self.input[(i*LINE_LENGTH)..((i*LINE_LENGTH)+LINE_LENGTH-1)]
-   end
-   groups
   end
 end

@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :one_time_pads, dependent: :destroy
   has_many :reverse_date_cyphers, dependent: :destroy
   has_many :rot_cyphers, dependent: :destroy
+  has_many :v_square_cyphers, dependent: :destroy
   
   #password stuff / account setup
   attr_accessor :password, :salt

@@ -1,0 +1,26 @@
+<%= form_for(@v_square_cypher) do |f| %>
+  <% if @v_square_cypher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@v_square_cypher.errors.count, "error") %> prohibited this v_square_cypher from being saved:</h2>
+
+      <ul>
+      <% @v_square_cypher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :input %><br>
+    <%= f.text_area :input %>
+  </div>
+  <%= f.hidden_field :user_id, value:@user.id %><br>
+  <div class="field">
+    <%= f.label :codeword %><br>
+    <%= f.text_field :codeword %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

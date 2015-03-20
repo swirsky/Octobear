@@ -1,0 +1,17 @@
+<p>
+<strong>Input:</strong><br />
+  <%= raw @v_square_cypher.blockify_input %>
+</p>
+
+<p>
+<strong>Output:</strong><br />
+  <%= raw @v_square_cypher.blockify_output %>
+</p>
+
+<p>
+  <strong>Codeword:</strong>
+  <%= @v_square_cypher.codeword %>
+</p>
+
+<%= link_to 'Edit', edit_v_square_cypher_path(@v_square_cypher) %> |
+<%= link_to 'Back', v_square_cyphers_path %>
