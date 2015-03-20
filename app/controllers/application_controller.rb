@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
   before_filter :setup_user
 
+  def ensure_current_user
+    redirect_to :root and return unless current_user
+  end
+
   def setup_user
     @user ||= current_user if current_user
   end

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Reverse Date Cyphers</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Input</th>
+      <th>Date cypher</th>
+      <th>Output</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reverse_date_cyphers.each do |reverse_date_cypher| %>
+      <tr>
+        <td><%= reverse_date_cypher.input[0..15] %></td>
+        <td><%= reverse_date_cypher.date_cypher %></td>
+        <td><%= reverse_date_cypher.output[0..15] %></td>
+        <td><%= link_to 'Show', reverse_date_cypher %></td>
+        <td><%= link_to 'Edit', edit_reverse_date_cypher_path(reverse_date_cypher) %></td>
+        <td><%= link_to 'Destroy', reverse_date_cypher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reverse date cypher', new_reverse_date_cypher_path %>

@@ -1,0 +1,34 @@
+<%= form_for(@reverse_date_cypher) do |f| %>
+  <% if @reverse_date_cypher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reverse_date_cypher.errors.count, "error") %> prohibited this reverse_date_cypher from being saved:</h2>
+
+      <ul>
+      <% @reverse_date_cypher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :input %><br>
+    <%= f.text_area :input %>
+  </div>
+  <div class="field">
+    <%= f.label :date_year %><br>
+    <%= f.number_field :date_year %>
+  </div>
+  <div class="field">
+    <%= f.label :date_month %><br>
+    <%= f.number_field :date_month %>
+  </div>
+  <div class="field">
+    <%= f.label :date_day %><br>
+    <%= f.number_field :date_day %>
+  </div>
+  <%= f.hidden_field :user_id, value: @user.id %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

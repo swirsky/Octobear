@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+<strong>Input:</strong><br/>
+  <%= raw @reverse_date_cypher.blockify_input %>
+</p>
+
+<p>
+  <strong>Date cypher:</strong>
+  <%= @reverse_date_cypher.date_cypher %>
+</p>
+
+<p>
+<strong>Output:</strong><br/>
+  <%= raw @reverse_date_cypher.blockify_output %>
+</p>
+
+<%= link_to 'Edit', edit_reverse_date_cypher_path(@reverse_date_cypher) %> |
+<%= link_to 'Back', reverse_date_cyphers_path %>

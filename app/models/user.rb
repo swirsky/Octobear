@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :links, dependent: :destroy
   has_many :one_time_pads, dependent: :destroy
+  has_many :reverse_date_cyphers, dependent: :destroy
   
   #password stuff / account setup
   attr_accessor :password, :salt
