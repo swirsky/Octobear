@@ -38,16 +38,19 @@
     <a class="accordion-toggle" data-toggle="collapse" data-parent="#paste_dropdown" href="#paste_boxes">Get Pastable Text</a>
   </div>
   <div class="panel-collapse collapse" id="paste_boxes">
+    <strong>Input:</strong>
     <blockquote>
       <p>
         <%= raw @one_time_pad.blockify_input(string:true) %>
       </p>
     </blockquote>
+    <strong>Cypher:</strong>
     <blockquote>
       <p>
         <%= raw @one_time_pad.blockify_cypher(string:true) %>
       </p>
     </blockquote>
+    <strong>Output:</strong>
     <blockquote>
       <p>
         <%= raw @one_time_pad.blockify_output(string:true) %>

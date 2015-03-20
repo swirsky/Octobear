@@ -18,11 +18,13 @@
     <a class="accordion-toggle" data-toggle="collapse" data-parent="#paste_dropdown" href="#paste_boxes">Get Pastable Text</a>
   </div>
   <div class="panel-collapse collapse" id="paste_boxes">
+    <strong>Input:</strong>
     <blockquote>
       <p>
         <%= raw @transposition_cipher.blockify_input(string:true) %>
       </p>
     </blockquote>
+    <strong>Output:</strong>
     <blockquote>
       <p>
         <%= raw @transposition_cipher.blockify_output(string:true) %>
