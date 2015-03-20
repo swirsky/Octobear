@@ -53,7 +53,7 @@ class OneTimePad < ActiveRecord::Base
   def get_cypher_lines
     lines = []
     number_of_keys.times do |i|
-      line = self.cypher.gsub(' ', '')[(self.line_length*i)..((self.line_length*i)+self.line_length-1)]
+      line = self.cypher.gsub(' ', '').gsub(/\n/,'')[(self.line_length*i)..((self.line_length*i)+self.line_length-1)]
       lines << "#{line.scan(/.{#{self.group_length}}|.+/).join(" ")}"
     end
     lines
@@ -62,7 +62,7 @@ class OneTimePad < ActiveRecord::Base
   def get_encoded_lines
     lines = []
     number_of_lines.times do |i|
-      line = self.output.gsub(' ', '')[(self.line_length*i)..((self.line_length*i)+self.line_length-1)]
+      line = self.output.gsub(' ', '').gsub(/\n/, '')[(self.line_length*i)..((self.line_length*i)+self.line_length-1)]
       lines << "#{line.scan(/.{#{self.group_length}}|.+/).join(" ")}"
     end
     lines
