@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   before_filter :ensure_current_user
 
   before_action :set_page, only: [:show, :edit, :update, :destroy]
-  before_action :set_book, except: [:create]
+  before_action :set_book
 
   # GET /pages
   # GET /pages.json
@@ -89,8 +89,8 @@ class PagesController < ApplicationController
     def book_id
       if params[:book_id]
         params[:book_id]
-      elsif params[:running_key] && params[:running_key][:book_id]
-        params[:running_key][:book_id]
+      elsif params[:page] && params[:page][:book_id]
+        params[:page][:book_id]
       else
         nil
       end
