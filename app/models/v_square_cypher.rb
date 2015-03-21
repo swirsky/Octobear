@@ -36,7 +36,7 @@ class VSquareCypher < ActiveRecord::Base
       if c.blank?
         result += " "
       else
-        code_count = 0 if code_count < self.codeword.length
+        code_count = 0 unless code_count < self.codeword.length
         result += ALPHA_SQUARE[self.codeword[code_count]][ALPHA_TO_NUM[c]]
         code_count +=1
       end
