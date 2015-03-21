@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :obstacles
+
+  resources :chases
+
   resources :transposition_ciphers
 
   resources :v_square_cyphers
@@ -16,6 +20,10 @@ Rails.application.routes.draw do
   get ':slug' => 'links#show'
 
   Rails.application.routes.draw do
+  resources :obstacles
+
+  resources :chases
+
   resources :transposition_ciphers
 
   resources :v_square_cyphers

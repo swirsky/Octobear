@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Name:</strong>
+  <%= @obstacle.name %>
+</p>
+<p>
+  <strong>Primary Skill:</strong>
+  <%= @obstacle.primary_skill %>
+</p>
+
+<p>
+  <strong>Secondary Skill:</strong>
+  <%= @obstacle.secondary_skill %>
+</p>
+
+<p>
+  <strong>Dc:</strong>
+  <%= @obstacle.dc %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @obstacle.description %>
+</p>
+
+<p>
+  <strong>Difficulty:</strong>
+  <%= Obstacle::DC_TO_DIFFICULTY[@obstacle.dc] %>
+</p>
+
+<%= link_to 'Edit', edit_obstacle_path(@obstacle) %> |
+<%= link_to 'Back', obstacles_path(chase_id:@obstacle.chase_id) %>

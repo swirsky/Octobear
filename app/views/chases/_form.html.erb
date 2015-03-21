@@ -1,0 +1,30 @@
+<%= form_for(@chase) do |f| %>
+  <% if @chase.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@chase.errors.count, "error") %> prohibited this chase from being saved:</h2>
+
+      <ul>
+      <% @chase.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :cr %><br>
+    <%= f.number_field :cr %>
+  </div>
+    <%= f.hidden_field :user_id, value:@user.id %>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

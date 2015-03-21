@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320200132) do
+ActiveRecord::Schema.define(version: 20150321011230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chases", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.integer  "cr",          null: false
+    t.integer  "user_id",     null: false
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "links", force: :cascade do |t|
     t.string   "url",        null: false
@@ -25,6 +34,18 @@ ActiveRecord::Schema.define(version: 20150320200132) do
   end
 
   add_index "links", ["slug"], name: "index_links_on_slug", unique: true, using: :btree
+
+  create_table "obstacles", force: :cascade do |t|
+    t.string   "primary_skill",   null: false
+    t.string   "secondary_skill"
+    t.integer  "dc",              null: false
+    t.string   "description"
+    t.integer  "chase_id",        null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "name"
+    t.integer  "order"
+  end
 
   create_table "one_time_pads", force: :cascade do |t|
     t.string   "input",                                 null: false

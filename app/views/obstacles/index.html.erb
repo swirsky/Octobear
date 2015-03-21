@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Obstacles</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Skill</th>
+      <th>Dc</th>
+      <th>Description</th>
+      <th>Chase</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @obstacles.each do |obstacle| %>
+      <tr>
+        <td><%= obstacle.skill %></td>
+        <td><%= obstacle.dc %></td>
+        <td><%= obstacle.description %></td>
+        <td><%= obstacle.chase_id %></td>
+        <td><%= link_to 'Show', obstacle %></td>
+        <td><%= link_to 'Edit', edit_obstacle_path(obstacle) %></td>
+        <td><%= link_to 'Destroy', obstacle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Obstacle', new_obstacle_path %>

@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :reverse_date_cyphers, dependent: :destroy
   has_many :rot_cyphers, dependent: :destroy
   has_many :v_square_cyphers, dependent: :destroy
+  has_many :chases, dependent: :destroy
   
   #password stuff / account setup
   attr_accessor :password, :salt

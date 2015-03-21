@@ -1,0 +1,41 @@
+<%= form_for(@obstacle) do |f| %>
+  <% if @obstacle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@obstacle.errors.count, "error") %> prohibited this obstacle from being saved:</h2>
+
+      <ul>
+      <% @obstacle.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :primary_skill %><br>
+    <%= f.select :primary_skill, options_for_select(Obstacle::PRIMARY_SKILLS) %>
+  </div>
+  <div class="field">
+    <%= f.label :secondary_skill %><br>
+    <%= f.select :secondary_skill, options_for_select([[""], Obstacle::SECONDARY_SKILLS].flatten) %>
+  </div>
+  <div class="field">
+    <%= f.label :difficulty %><br>
+    <%= f.select :difficulty, options_for_select(Obstacle::DIFFICULTIES, :selected => Obstacle::DC_TO_DIFFICULTY[@obstacle.dc]) %>
+  </div>
+  <div class="field">
+    <%= f.label :order %><br>
+    <%= f.select :select_order, options_for_select(@obstacle.order_options(@chase), :selected => @obstacle.order) %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+    <%= f.hidden_field :chase_id, value:@chase.id %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
