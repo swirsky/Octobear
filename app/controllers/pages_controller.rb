@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   before_filter :ensure_current_user
 
   before_action :set_page, only: [:show, :edit, :update, :destroy]
-  before_action :set_book, only:[:show, :edit, :update, :index, :new]
+  before_action :set_book, except: [:create]
 
   # GET /pages
   # GET /pages.json
@@ -59,7 +59,7 @@ class PagesController < ApplicationController
   def destroy
     @page.destroy
     respond_to do |format|
-      format.html { redirect_to pages_url, notice: 'Page was successfully destroyed.' }
+      format.html { redirect_to book_url(@book), notice: 'Page was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,12 +71,15 @@ class PagesController < ApplicationController
     end
 
     def set_book
-      @book = Book.find(params[:book_id]) if params[:book_id]
-      @book ||= @page.book
-      unless @book
-        flash[:message] = "You need a book"
-        redirect_to @user
+      if params[:book_id] || page_params[:book_id]
+        id = params[:book_id] || page_params[:book_id]
+        @book = Book.find(id)
       end
+
+      if @page && !@page.book.nil?
+        @book ||= @page.book
+      end
+      redirect_to :root and return unless @book
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

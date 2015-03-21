@@ -2,7 +2,7 @@ class RunningKeysController < ApplicationController
   before_filter :ensure_current_user
 
   before_action :set_running_key, only: [:show, :edit, :update, :destroy]
-  before_action :set_book, only: [:show, :edit, :update, :index, :new]
+  before_action :set_book
   before_action :check_pages, only: [:new]
 
   # GET /running_keys
@@ -18,6 +18,8 @@ class RunningKeysController < ApplicationController
 
   # GET /running_keys/new
   def new
+    puts "RETARD FUCKS"
+    puts params.inspect
     @running_key = RunningKey.new
   end
 
@@ -35,6 +37,9 @@ class RunningKeysController < ApplicationController
         format.html { redirect_to @running_key, notice: 'Running key was successfully created.' }
         format.json { render :show, status: :created, location: @running_key }
       else
+        puts "shitfucks"
+        puts running_key_params.inspect
+        puts running_key_params[:book_id].inspect
         format.html { render :new }
         format.json { render json: @running_key.errors, status: :unprocessable_entity }
       end
@@ -60,7 +65,7 @@ class RunningKeysController < ApplicationController
   def destroy
     @running_key.destroy
     respond_to do |format|
-      format.html { redirect_to running_keys_url, notice: 'Running key was successfully destroyed.' }
+      format.html { redirect_to book_url(@book), notice: 'Running key was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -72,8 +77,15 @@ class RunningKeysController < ApplicationController
     end
 
     def set_book
-      @book = Book.find(params[:book_id]) if params[:book_id]
-      @book ||= @running_key.book
+      if params[:book_id] || running_key_params[:book_id]
+        id = params[:book_id] || running_key_params[:book_id]
+        @book = Book.find(id)
+      end
+
+      if @running_key && !@running_key.book.nil?
+        @book ||= @running_key.book
+      end
+      redirect_to :root and return unless @book
     end
 
     def check_pages

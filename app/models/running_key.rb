@@ -4,6 +4,8 @@ class RunningKey < ActiveRecord::Base
   belongs_to :user
   belongs_to :book
 
+  validates_presence_of :input, :page, :line, :group_length, :user_id, :book_id
+
   before_save :sanitize_input, :set_indicator_block, :set_and_sanitize_key, :encrypt_message
 
   def indicator_block_position
@@ -15,6 +17,12 @@ class RunningKey < ActiveRecord::Base
   def set_indicator_block
     arr = []
     self.indicator_block = ""
+    if self.group_length > 5
+      #add random letters to start of indicator block
+      (self.group_length - 5).times do |i|
+        self.indicator_block += ALPHA_LOOKUP[rand(1000)%26]
+      end
+    end
     arr << self.page / 100
     arr << (self.page % 100) / 10 
     arr << self.page % 10
@@ -29,7 +37,6 @@ class RunningKey < ActiveRecord::Base
     self.output = ""
     blocks = []
     str = ""
-    puts self.key.inspect
     self.input.chars.each_with_index do |c, index|
       if index%self.group_length == 0
         blocks << str
