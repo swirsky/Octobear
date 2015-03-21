@@ -5,6 +5,7 @@ class RunningKey < ActiveRecord::Base
   belongs_to :book
 
   validates_presence_of :input, :page, :line, :group_length, :user_id, :book_id
+  validate :valid_line?
 
   before_save :sanitize_input, :set_indicator_block, :set_and_sanitize_key, :encrypt_message
 
@@ -13,6 +14,10 @@ class RunningKey < ActiveRecord::Base
   end
 
   private
+
+  def valid_line?
+    errors.add(:line, "Line not available on page") unless self.book.open_book(self.page, self.line)
+  end
 
   def set_indicator_block
     arr = []

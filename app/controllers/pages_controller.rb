@@ -71,9 +71,8 @@ class PagesController < ApplicationController
     end
 
     def set_book
-      if params[:book_id] || page_params[:book_id]
-        id = params[:book_id] || page_params[:book_id]
-        @book = Book.find(id)
+      if book_id
+        @book = Book.find(book_id)
       end
 
       if @page && !@page.book.nil?
@@ -85,5 +84,15 @@ class PagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
       params.require(:page).permit(:book_id, :text, :page_number, :line_length)
+    end
+
+    def book_id
+      if params[:book_id]
+        params[:book_id]
+      elsif params[:running_key] && params[:running_key][:book_id]
+        params[:running_key][:book_id]
+      else
+        nil
+      end
     end
 end

@@ -8,7 +8,8 @@ class RunningKeysController < ApplicationController
   # GET /running_keys
   # GET /running_keys.json
   def index
-    @running_keys = @book.running_keys
+    redirect_to @book and return
+    #@running_keys = @book.running_keys
   end
 
   # GET /running_keys/1
@@ -77,9 +78,8 @@ class RunningKeysController < ApplicationController
     end
 
     def set_book
-      if params[:book_id] || running_key_params[:book_id]
-        id = params[:book_id] || running_key_params[:book_id]
-        @book = Book.find(id)
+      if book_id
+        @book = Book.find(book_id)
       end
 
       if @running_key && !@running_key.book.nil?
@@ -96,5 +96,15 @@ class RunningKeysController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def running_key_params
       params.require(:running_key).permit(:user_id, :input, :group_length, :page, :line, :book_id)
+    end
+
+    def book_id
+      if params[:book_id]
+        params[:book_id]
+      elsif params[:running_key] && params[:running_key][:book_id]
+        params[:running_key][:book_id]
+      else
+        nil
+      end
     end
 end
