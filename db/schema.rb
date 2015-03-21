@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321011230) do
+ActiveRecord::Schema.define(version: 20150321041218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "books", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.string   "title",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "chases", force: :cascade do |t|
     t.string   "name",        null: false
@@ -63,6 +70,15 @@ ActiveRecord::Schema.define(version: 20150321011230) do
 
   add_index "one_time_pads", ["user_id"], name: "index_one_time_pads_on_user_id", using: :btree
 
+  create_table "pages", force: :cascade do |t|
+    t.integer  "book_id",                  null: false
+    t.integer  "page_number",              null: false
+    t.integer  "line_length", default: 50, null: false
+    t.string   "text",                     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "reverse_date_cyphers", force: :cascade do |t|
     t.string   "input",       null: false
     t.integer  "date_cypher", null: false
@@ -79,6 +95,20 @@ ActiveRecord::Schema.define(version: 20150321011230) do
     t.string   "output",                  null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "running_keys", force: :cascade do |t|
+    t.integer  "user_id",                      null: false
+    t.integer  "book_id",                      null: false
+    t.integer  "group_length",    default: 5,  null: false
+    t.string   "input",           default: "", null: false
+    t.string   "indicator_block",              null: false
+    t.string   "output",                       null: false
+    t.integer  "page",                         null: false
+    t.integer  "line",                         null: false
+    t.string   "key",                          null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "transposition_ciphers", force: :cascade do |t|

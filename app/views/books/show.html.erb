@@ -1,0 +1,16 @@
+<p>
+  <strong>Title:</strong>
+  <%= @book.title %>
+</p>
+
+<%= link_to "New Page", new_page_path(book_id:@book.id) %>
+<%= render partial: 'pages/index', locals: {pages: @book.pages.order(:page_number), book_id: @book.id} %>
+<br />
+<br />
+<%= link_to "New Running Cipher", new_running_key_path(book_id:@book.id) %>
+<%= render partial: 'running_keys/index', locals: {running_keys: @book.running_keys.order(:page), book_id: @book.id} %>
+<br />
+
+
+<%= link_to 'Edit', edit_book_path(@book) %> |
+<%= link_to 'Back', books_path %>

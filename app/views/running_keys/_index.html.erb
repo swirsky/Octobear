@@ -1,0 +1,36 @@
+<h1>Listing Running Keys</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Input</th>
+      <th>Group length</th>
+      <th>Page</th>
+      <th>Line</th>
+      <th>Indicator block</th>
+      <th>Output</th>
+      <th>Key</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% running_keys.each do |running_key| %>
+      <tr>
+        <td><%= running_key.input %></td>
+        <td><%= running_key.group_length %></td>
+        <td><%= running_key.page %></td>
+        <td><%= running_key.line %></td>
+        <td><%= running_key.indicator_block %></td>
+        <td><%= running_key.output %></td>
+        <td><%= link_to 'Show', running_key %></td>
+        <td><%= link_to 'Edit', edit_running_key_path(running_key) %></td>
+        <td><%= link_to 'Destroy', running_key, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Running key', new_running_key_path(book_id:book_id) %>

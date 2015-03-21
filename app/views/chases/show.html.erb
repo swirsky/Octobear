@@ -15,7 +15,7 @@
   <%= @chase.description %>
 </p>
 
-<%= link_to "Add an Obstacle", new_obstacle_path(chase_id:@chase) %>
+<%= link_to "Add an Obstacle", new_obstacle_path(chase_id:@chase.id) %>
 <%= render partial: 'obstacles/index', locals: {obstacles: @chase.obstacles.order(:order), chase_id: @chase.id} %>
 
 <%= link_to 'Edit', edit_chase_path(@chase) %> |

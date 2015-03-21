@@ -9,8 +9,8 @@ class Obstacle < ActiveRecord::Base
   attr_accessor :difficulty
   attr_accessor :select_order
 
-  PRIMARY_SKILLS = %w(Acrobatics Climb EscapeArtist Ride Swim)
-  SECONDARY_SKILLS = %w(Bluff Diplomacy Intimidate Perception)
+  PRIMARY_SKILLS = %w(Acrobatics Climb EscapeArtist Ride Swim Fortitude Reflex Will)
+  SECONDARY_SKILLS = %w(Bluff Diplomacy Intimidate Perception Fortitude Reflex Will)
   DIFFICULTIES = %w(Trivial Simple Standard Difficult VeryDifficult)
   DC_TO_DIFFICULTY = {10 => "Trivial", 15 => "Simple", 20 => "Standard", 25 => "Difficult", 30 => "VeryDifficult"}
 

@@ -1,8 +1,9 @@
 <div class='navbar navbar-left panel panel-default'>
   <ul class='list-group'>
     <% if user_signed_in? %>
-      <li class='list-group-item'><%= link_to 'My Chases', chases_path %></li>
       <li class='list-group-item'><%= link_to 'My Links', links_path %></li>
+    <li class='list-group-item'><%= link_to 'My Chases', chases_path %></li>
+    <li class='list-group-item'><%= link_to 'My Books and Running Cyphers', books_path %></li>
     <li class='list-group-item'><%= link_to 'My One-Time Pads', one_time_pads_path %></li>
     <li class='list-group-item'>
     <div class="panel-group" id="simple_cypher_dropdown">

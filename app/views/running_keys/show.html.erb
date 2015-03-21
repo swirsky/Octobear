@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Input:</strong>
+  <%= @running_key.input %>
+</p>
+
+<p>
+  <strong>Group length:</strong>
+  <%= @running_key.group_length %>
+</p>
+
+<p>
+  <strong>Indicator block:</strong>
+  <%= @running_key.indicator_block %>
+</p>
+
+<p>
+  <strong>Output:</strong>
+  <%= @running_key.output %>
+</p>
+<p>
+  <strong>Book:</strong>
+  <%= @running_key.book.title %>
+</p>
+<p>
+  <strong>Page:</strong>
+  <%= @running_key.page %>
+</p>
+<p>
+  <strong>Line:</strong>
+  <%= @running_key.line %>
+</p>
+
+<p>
+  <strong>Key:</strong>
+  <%= @running_key.key %>
+</p>
+
+<%= link_to 'Edit', edit_running_key_path(@running_key) %> |
+<%= link_to 'Back', book_path(@book) %>

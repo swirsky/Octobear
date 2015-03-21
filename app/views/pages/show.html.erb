@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Page Number:</strong>
+  <%= @page.page_number %>
+</p>
+
+<p>
+  <strong>Line Length:</strong>
+  <%= @page.line_length %>
+</p>
+
+<p>
+<strong>Text:</strong><br />
+  <%= raw @page.blockify_text %>
+</p>
+
+<%= link_to 'Edit', edit_page_path(@page) %> |
+<%= link_to 'Back', book_path(@book) %>
