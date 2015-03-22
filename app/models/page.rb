@@ -16,7 +16,7 @@ class Page < ActiveRecord::Base
 
   def lines
     #get first 50, then keep grabbing until space
-    self.text.scan(/.{#{self.line_length}}[(a-zA-Z)\s\.\,\!]{1,5}|.+/).each(&:strip!)
+    self.text.scan(/.{#{self.line_length}}|.+[(a-zA-Z)\.\,\!]{1,5}/).each(&:strip!)
   end
 
   private
