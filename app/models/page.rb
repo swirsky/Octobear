@@ -36,7 +36,7 @@ class Page < ActiveRecord::Base
         ex = ''
         chars[(self.line_length-4)..(self.line_length+1)].chars.each do |c|
           next if @done
-          if c.match(/[a-zA-Z\.\,\!\?\n\r]/)
+          if c.match(/[a-zA-Z0-9\.\,\!\?\n\r]/)
             ex += c
             @done = true if c.match(/[\.\,\!\?\n\r]/)
           else
@@ -44,27 +44,31 @@ class Page < ActiveRecord::Base
           end
         end
 
+        tail_str = ""
+        tail_done = false
         chars[(self.line_length+2)..(self.line_length+5)].chars.each_with_index do |c, i|
-          next if @done
-          if c.match(/[a-zA-Z]/)
-            ex += c
-            else
-            @done = true
+          next if @done || tail_done
+          if c.match(/[a-zA-Z0-9]/)
+            tail_str += c
+          else
+            tail_str = ""
+            tail_done = true
           end
         end
 
+        ex += tail_str
+
         #check for final punctuation
-        chars[self.line_length+ex.length..self.line_length+1+ex.length].chars.each_with_index do |cap, i|
-         next if @done
-         if cap.match(/[\n\r\s\,\.\!\?]/)
-           case i
-           when 0
-             @done = true
-           when 1
-             ex += cap
-           end
+        first_cap = ""
+        chars[(t.length+ex.length)..(t.length+1+ex.length)].chars.each_with_index do |cap, i|
+          next if @done
+          if cap.match(/[\n\r\s\,\.\!\?]/)
+            puts "matched!"
+            ex += first_cap + cap
             @done = true
-         end
+          elsif cap.match(/[a-zA-Z0-9]/)
+            first_cap = cap
+          end
         end
         t += ex if @done
       else
@@ -72,8 +76,8 @@ class Page < ActiveRecord::Base
         t = chars
       end
       adder = @done ? t : "#{t}-"
-    lines << adder
-    chars = chars.sub(t, '')
+      lines << adder
+      chars = chars.sub(t, '')
     end
     lines
   end
