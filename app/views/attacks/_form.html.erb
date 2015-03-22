@@ -1,0 +1,41 @@
+<%= form_for(@attack) do |f| %>
+  <% if @attack.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@attack.errors.count, "error") %> prohibited this attack from being saved:</h2>
+
+      <ul>
+      <% @attack.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :damage %><br>
+    <%= f.number_field :damage %>
+  </div>
+  <div class="field">
+    <%= f.label :effect %><br>
+    <%= f.text_field :effect %>
+  </div>
+  <div class="field">
+    <%= f.label :critchance %><br>
+    <%= f.number_field :critchance %>
+  </div>
+  <div class="field">
+    <%= f.label :tohit %><br>
+    <%= f.number_field :tohit %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,37 @@
+<%= form_for(@caster) do |f| %>
+  <% if @caster.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@caster.errors.count, "error") %> prohibited this caster from being saved:</h2>
+
+      <ul>
+      <% @caster.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :wins %><br>
+    <%= f.number_field :wins %>
+  </div>
+  <div class="field">
+    <%= f.label :losses %><br>
+    <%= f.number_field :losses %>
+  </div>
+  <div class="field">
+    <%= f.label :ties %><br>
+    <%= f.number_field :ties %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

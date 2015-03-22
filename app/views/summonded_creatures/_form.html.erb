@@ -1,0 +1,65 @@
+<%= form_for(@summonded_creature) do |f| %>
+  <% if @summonded_creature.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@summonded_creature.errors.count, "error") %> prohibited this summonded_creature from being saved:</h2>
+
+      <ul>
+      <% @summonded_creature.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :caster_id %><br>
+    <%= f.number_field :caster_id %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :hp %><br>
+    <%= f.number_field :hp %>
+  </div>
+  <div class="field">
+    <%= f.label :str %><br>
+    <%= f.number_field :str %>
+  </div>
+  <div class="field">
+    <%= f.label :dex %><br>
+    <%= f.number_field :dex %>
+  </div>
+  <div class="field">
+    <%= f.label :con %><br>
+    <%= f.number_field :con %>
+  </div>
+  <div class="field">
+    <%= f.label :intel %><br>
+    <%= f.number_field :intel %>
+  </div>
+  <div class="field">
+    <%= f.label :wis %><br>
+    <%= f.number_field :wis %>
+  </div>
+  <div class="field">
+    <%= f.label :cha %><br>
+    <%= f.number_field :cha %>
+  </div>
+  <div class="field">
+    <%= f.label :weak_against %><br>
+    <%= f.text_field :weak_against %>
+  </div>
+  <div class="field">
+    <%= f.label :resistant_against %><br>
+    <%= f.text_field :resistant_against %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

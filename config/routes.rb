@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :attacks
+
+  resources :casters
+
+  resources :summoned_creatures
+
   resources :pages
 
   resources :books
@@ -26,6 +32,12 @@ Rails.application.routes.draw do
   get ':slug' => 'links#show'
 
   Rails.application.routes.draw do
+  resources :attacks
+
+  resources :casters
+
+  resources :summoned_creatures
+
   resources :pages
 
   resources :books

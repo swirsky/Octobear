@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @summoned_creature.name %>
+</p>
+
+<p>
+  <strong>Caster:</strong>
+  <%= @summoned_creature.caster_id %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @summoned_creature.type %>
+</p>
+
+<p>
+  <strong>Hp:</strong>
+  <%= @summoned_creature.hp %>
+</p>
+
+<p>
+  <strong>Str:</strong>
+  <%= @summoned_creature.str %>
+</p>
+
+<p>
+  <strong>Dex:</strong>
+  <%= @summoned_creature.dex %>
+</p>
+
+<p>
+  <strong>Con:</strong>
+  <%= @summoned_creature.con %>
+</p>
+
+<p>
+  <strong>Intel:</strong>
+  <%= @summoned_creature.intel %>
+</p>
+
+<p>
+  <strong>Wis:</strong>
+  <%= @summoned_creature.wis %>
+</p>
+
+<p>
+  <strong>Cha:</strong>
+  <%= @summoned_creature.cha %>
+</p>
+
+<p>
+  <strong>Weak against:</strong>
+  <%= @summoned_creature.weak_against %>
+</p>
+
+<p>
+  <strong>Resistant against:</strong>
+  <%= @summoned_creature.resistant_against %>
+</p>
+
+<%= link_to 'Edit', edit_summoned_creature_path(@summoned_creature) %> |
+<%= link_to 'Back', summoned_creatures_path %>

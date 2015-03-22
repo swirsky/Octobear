@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Summonded Creatures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Caster</th>
+      <th>Type</th>
+      <th>Hp</th>
+      <th>Str</th>
+      <th>Dex</th>
+      <th>Con</th>
+      <th>Intel</th>
+      <th>Wis</th>
+      <th>Cha</th>
+      <th>Weak against</th>
+      <th>Resistant against</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @summonded_creatures.each do |summonded_creature| %>
+      <tr>
+        <td><%= summonded_creature.name %></td>
+        <td><%= summonded_creature.caster_id %></td>
+        <td><%= summonded_creature.type %></td>
+        <td><%= summonded_creature.hp %></td>
+        <td><%= summonded_creature.str %></td>
+        <td><%= summonded_creature.dex %></td>
+        <td><%= summonded_creature.con %></td>
+        <td><%= summonded_creature.intel %></td>
+        <td><%= summonded_creature.wis %></td>
+        <td><%= summonded_creature.cha %></td>
+        <td><%= summonded_creature.weak_against %></td>
+        <td><%= summonded_creature.resistant_against %></td>
+        <td><%= link_to 'Show', summonded_creature %></td>
+        <td><%= link_to 'Edit', edit_summonded_creature_path(summonded_creature) %></td>
+        <td><%= link_to 'Destroy', summonded_creature, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Summonded creature', new_summonded_creature_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @caster.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @caster.user_id %>
+</p>
+
+<p>
+  <strong>Wins:</strong>
+  <%= @caster.wins %>
+</p>
+
+<p>
+  <strong>Losses:</strong>
+  <%= @caster.losses %>
+</p>
+
+<p>
+  <strong>Ties:</strong>
+  <%= @caster.ties %>
+</p>
+
+<%= link_to 'Edit', edit_caster_path(@caster) %> |
+<%= link_to 'Back', casters_path %>
