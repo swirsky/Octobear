@@ -81,7 +81,7 @@ class Page < ActiveRecord::Base
   private
 
   def sanitize_text
-    self.text.gsub!("  ", " ")
+    self.text.gsub("  ", " ")
   end
 
   def check_ciphers
