@@ -8,7 +8,7 @@
 <br />
 <br />
 <%= link_to "New Running Cipher", new_running_key_path(book_id:@book.id) %>
-<%= render partial: 'running_keys/index', locals: {running_keys: @book.running_keys.order(:page), book_id: @book.id} %>
+<%= render partial: 'running_keys/index', locals: {running_keys: @book.running_keys.order(:page_number), book_id: @book.id} %>
 <br />
 
 
