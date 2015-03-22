@@ -17,13 +17,13 @@
   <tbody>
     <% running_keys.each do |running_key| %>
       <tr>
-        <td><%= running_key.input %></td>
+        <td><%= running_key.input[0..15] %></td>
         <td><%= running_key.group_length %></td>
         <td><%= running_key.page_number %></td>
         <td><%= running_key.line %></td>
         <td><%= running_key.indicator_block %></td>
-        <td><%= running_key.output %></td>
-        <td><%= running_key.key %></td>
+        <td><%= running_key.output[0..15] %></td>
+        <td><%= running_key.key[0..15] %></td>
         <td><%= link_to 'Show', running_key %></td>
         <td><%= link_to 'Edit', edit_running_key_path(running_key) %></td>
         <td><%= link_to 'Destroy', running_key, method: :delete, data: { confirm: 'Are you sure?' } %></td>
