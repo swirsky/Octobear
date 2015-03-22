@@ -5,6 +5,8 @@ class Page < ActiveRecord::Base
   belongs_to :book
 
   after_destroy :kill_ciphers
+  before_save :sanitize_text
+  before_save :check_ciphers
 
   def page_width
     lines.collect{|line| line.gsub(' ','').length}.sort {|a,b| b <=> a}.first*0.75
@@ -32,16 +34,19 @@ class Page < ActiveRecord::Base
         ex = ''
         chars[(self.line_length+1)..(self.line_length+5)].chars.each do |c|
           next if @done
-          if c.match(/[a-zA-Z\.\,\!\?]/)
+          if c.match(/[a-zA-Z\.\,\!\?\n\r]/)
             ex += c
-            @done = true if c.match(/[\.\,\!\?]/)
+            @done = true if c.match(/[\.\,\!\?\n\r]/)
           else
             @done = true
           end
         end
-        if chars[self.line_length+1+ex.length] && chars[self.line_length+1+ex.length].match(/[\s\,\.\!\?]/)
+        chars[self.line_length+ex.length..self.line_length+1+ex.length].chars.each_with_index do |cap, i|
+         next if @done
+         if cap.match(/[\n\r\s\,\.\!\?]/)
+          ex += chars[self.line_length+ex.length..self.line_length+i+ex.length]
           @done = true
-          ex += chars[self.line_length+1+ex.length]
+         end
         end
         t += ex if @done
       else
@@ -57,7 +62,17 @@ class Page < ActiveRecord::Base
 
   private
 
+  def sanitize_text
+    self.text.gsub!("  ", " ")
+  end
+
+  def check_ciphers
+    RunningKey.where(book_id:self.book_id, page:self.page_number).each do |rk|
+      rk.destroy if lines[rk.line].nil?
+    end
+  end
+
   def kill_ciphers
-    RunningCipher.where(book_id:self.book_id, page_number:self.page_number).each(&:destroy)
+    RunningKey.where(book_id:self.book_id, page:self.page_number).each(&:destroy)
   end
 end
