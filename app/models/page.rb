@@ -6,12 +6,15 @@ class Page < ActiveRecord::Base
 
   after_destroy :kill_ciphers
 
+  def page_width
+    lines.collect{|line| line.gsub(' ','').length}.sort {|a,b| b <=> a}.first*0.75
+  end
+
   def blockify_text
     lines.join("<br>").gsub('\n', '<br>')
   end
 
   def get_line(line)
-    puts line.inspect
     lines[line-1]
   end
 
@@ -21,15 +24,14 @@ class Page < ActiveRecord::Base
     chars = self.text
     lines = []
     while !chars.empty?
-      if chars[0..50].match(/\n/)
+      if chars[0..self.line_length].match(/\n/)
         t = chars[0..chars.index(/\n/)]
-      elsif chars.length > 50
-        t = chars[0..50]
+      elsif chars.length > self.line_length
+        t = chars[0..self.line_length]
         @done = false
         ex = ''
-        chars[51..55].chars.each do |c|
+        chars[(self.line_length+1)..(self.line_length+5)].chars.each do |c|
           next if @done
-          puts 'loop'
           if c.match(/[a-zA-Z\.\,\!\?]/)
             ex += c
             @done = true if c.match(/[\.\,\!\?]/)
@@ -37,9 +39,9 @@ class Page < ActiveRecord::Base
             @done = true
           end
         end
-        if chars[51+ex.length] && chars[51+ex.length].match(/[\s\,\.\!\?]/)
+        if chars[self.line_length+1+ex.length] && chars[self.line_length+1+ex.length].match(/[\s\,\.\!\?]/)
           @done = true
-          ex += chars[51+ex.length]
+          ex += chars[self.line_length+1+ex.length]
         end
         t += ex if @done
       else
@@ -47,7 +49,7 @@ class Page < ActiveRecord::Base
       end
       adder = @done ? t : "#{t}-"
     lines << adder
-    chars.sub!(t, '')
+    chars = chars.sub(t, '')
     end
     lines
   end
