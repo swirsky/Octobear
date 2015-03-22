@@ -27,14 +27,14 @@ class Page < ActiveRecord::Base
     chars = self.text
     lines = []
     while !chars.empty?
-      if chars[0..self.line_length].match(/\n/)
+      if chars[0..(self.line_length-5)].match(/\n/)
         t = chars[0..chars.index(/\n/)]
         @done = true
-      elsif chars.length > self.line_length
-        t = chars[0..self.line_length]
+      elsif chars.length > (self.line_length-5)
+        t = chars[0..(self.line_length-5)]
         @done = false
         ex = ''
-        chars[(self.line_length+1)..(self.line_length+5)].chars.each do |c|
+        chars[(self.line_length-4)..(self.line_length+3)].chars.each do |c|
           next if @done
           if c.match(/[a-zA-Z\.\,\!\?\n\r]/)
             ex += c
@@ -43,6 +43,7 @@ class Page < ActiveRecord::Base
             @done = true
           end
         end
+        #check for final punctuation
         chars[self.line_length+ex.length..self.line_length+1+ex.length].chars.each_with_index do |cap, i|
          next if @done
          if cap.match(/[\n\r\s\,\.\!\?]/)
