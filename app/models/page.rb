@@ -45,6 +45,7 @@ class Page < ActiveRecord::Base
         end
         t += ex if @done
       else
+        @done = true
         t = chars
       end
       adder = @done ? t : "#{t}-"
