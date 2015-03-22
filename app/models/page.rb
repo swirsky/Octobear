@@ -9,6 +9,12 @@ class Page < ActiveRecord::Base
   before_save :sanitize_text
   before_save :check_ciphers
 
+  Inter = 2
+  Ex1 = Inter - 1
+  Ex2 = 3
+  Tail1 = Ex2 + 1
+  Tail2 = Tail1 + 1 
+
   def page_width
     lines.collect{|line| line.gsub(' ','').length}.sort {|a,b| b <=> a}.first*0.75
   end
@@ -27,18 +33,18 @@ class Page < ActiveRecord::Base
     chars = self.text
     lines = []
     while !chars.empty?
-      if chars[0..(self.line_length-5)].match(/\n/)
+      if chars[0..(self.line_length-Inter)].match(/\n/)
         t = chars[0..chars.index(/\n/)]
         @done = true
-      elsif chars.length > (self.line_length-5)
-        t = chars[0..(self.line_length-5)]
+      elsif chars.length > (self.line_length-Inter)
+        t = chars[0..(self.line_length-Inter)]
         @done = false
         ex = ''
-        chars[(self.line_length-4)..(self.line_length+1)].chars.each do |c|
+        chars[(self.line_length-Ex1)..(self.line_length+Ex2)].chars.each do |c|
           next if @done
-          if c.match(/[a-zA-Z0-9\.\,\!\?\n\r]/)
+          if c.match(/[a-zA-Z0-9\.\,\!\?\n\r\"\']/)
             ex += c
-            @done = true if c.match(/[\.\,\!\?\n\r]/)
+            @done = true if c.match(/[\.\,\!\?\n\r\"\']/)
           else
             @done = true
           end
@@ -46,7 +52,7 @@ class Page < ActiveRecord::Base
 
         tail_str = ""
         tail_done = false
-        chars[(self.line_length+2)..(self.line_length+5)].chars.each_with_index do |c, i|
+        chars[(self.line_length+Tail1)..(self.line_length+Tail2)].chars.each_with_index do |c, i|
           next if @done || tail_done
           if c.match(/[a-zA-Z0-9]/)
             tail_str += c
@@ -62,7 +68,7 @@ class Page < ActiveRecord::Base
         first_cap = ""
         chars[(t.length+ex.length)..(t.length+1+ex.length)].chars.each_with_index do |cap, i|
           next if @done
-          if cap.match(/[\n\r\s\,\.\!\?]/)
+          if cap.match(/[\n\r\s\,\.\!\?\"\']/)
             puts "matched!"
             ex += first_cap + cap
             @done = true
