@@ -11,7 +11,8 @@ class Page < ActiveRecord::Base
   end
 
   def get_line(line)
-    lines[line]
+    puts line.inspect
+    lines[line-1]
   end
 
   def lines
@@ -22,27 +23,30 @@ class Page < ActiveRecord::Base
     while !chars.empty?
       if chars[0..50].match(/\n/)
         t = chars[0..chars.index(/\n/)]
-      elsif chars.length >= 50
+      elsif chars.length > 50
         t = chars[0..50]
-        done = false
+        @done = false
         ex = ''
-        puts 'checking more'
         chars[51..55].chars.each do |c|
-          next if done
+          next if @done
           puts 'loop'
           if c.match(/[a-zA-Z\.\,\!\?]/)
             ex += c
-            done = true if c.match(/[\.\,\!\?]/)
+            @done = true if c.match(/[\.\,\!\?]/)
           else
-            done = true
+            @done = true
           end
         end
-        t += ex if done
-        puts t.inspect
+        if chars[51+ex.length] && chars[51+ex.length].match(/[\s\,\.\!\?]/)
+          @done = true
+          ex += chars[51+ex.length]
+        end
+        t += ex if @done
       else
         t = chars
       end
-    lines << t
+      adder = @done ? t : "#{t}-"
+    lines << adder
     chars.sub!(t, '')
     end
     lines
