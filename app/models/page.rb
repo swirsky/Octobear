@@ -28,6 +28,7 @@ class Page < ActiveRecord::Base
     while !chars.empty?
       if chars[0..self.line_length].match(/\n/)
         t = chars[0..chars.index(/\n/)]
+        @done = true
       elsif chars.length > self.line_length
         t = chars[0..self.line_length]
         @done = false
@@ -44,8 +45,13 @@ class Page < ActiveRecord::Base
         chars[self.line_length+ex.length..self.line_length+1+ex.length].chars.each_with_index do |cap, i|
          next if @done
          if cap.match(/[\n\r\s\,\.\!\?]/)
-          ex += chars[self.line_length+ex.length..self.line_length+i+ex.length]
-          @done = true
+           case i
+           when 0
+             ex += cap
+           when 1
+             ex += chars[self.line_length+ex.length..self.line_length+1+ex.length]
+           end
+            @done = true
          end
         end
         t += ex if @done
