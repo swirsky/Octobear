@@ -18,8 +18,8 @@
     <%= f.text_field :input %>
   </div>
   <div class="field">
-    <%= f.label :page %><br>
-    <%= f.select :page, options_for_select(@book.pages.pluck(:page_number)) %>
+    <%= f.label :page_number %><br>
+    <%= f.select :page_number, options_for_select(@book.pages.pluck(:page_number)) %>
   </div> 
   <div class="field">
     <%= f.label :line %><br>

@@ -3,11 +3,12 @@ class RunningKey < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :book
+  belongs_to :page
 
-  validates_presence_of :input, :page, :line, :group_length, :user_id, :book_id
+  validates_presence_of :input, :page_number, :line, :group_length, :user_id, :book_id
   validate :valid_line?
 
-  before_save :sanitize_input, :set_indicator_block, :set_and_sanitize_key, :encrypt_message
+  before_save :sanitize_input, :set_page, :set_indicator_block, :set_and_sanitize_key, :encrypt_message
 
   def indicator_block_position
     2
@@ -16,7 +17,7 @@ class RunningKey < ActiveRecord::Base
   private
 
   def valid_line?
-    errors.add(:line, "Line not available on page") unless self.book.open_book(self.page, self.line)
+    errors.add(:line, "Line not available on page") unless self.book.open_book(self.page_number, self.line)
   end
 
   def set_indicator_block
@@ -28,9 +29,9 @@ class RunningKey < ActiveRecord::Base
         self.indicator_block += ALPHA_LOOKUP[rand(1000)%26]
       end
     end
-    arr << self.page / 100
-    arr << (self.page % 100) / 10 
-    arr << self.page % 10
+    arr << self.page_number / 100
+    arr << (self.page_number % 100) / 10 
+    arr << self.page_number % 10
     arr << self.line / 10
     arr << self.line % 10
     arr.each do |c|
@@ -47,7 +48,6 @@ class RunningKey < ActiveRecord::Base
         blocks << str
         str = ""
       end
-      
       str += ALPHA_SQUARE[self.key[index]][ALPHA_TO_NUM[c]]
     end
     blocks << str unless str.blank?
@@ -61,7 +61,14 @@ class RunningKey < ActiveRecord::Base
   end
 
   def set_and_sanitize_key
-    self.key = self.book.open_book(self.page, self.line).gsub(/[^a-zA-Z]/, "").upcase
+    self.key = ""
+    self.input.scan(/.{#{self.page.line_length}}|.+/).each_index do |i|
+     self.key += self.book.open_book(self.page_number, self.line+i).gsub(/[^a-zA-Z]/, "").upcase
+    end
+  end
+
+  def set_page
+    self.page_id = Page.where(page_number:self.page_number,book_id:self.book_id).first.id
   end
 
 end

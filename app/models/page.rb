@@ -3,6 +3,7 @@ class Page < ActiveRecord::Base
   validates_presence_of :text, :page_number, :book_id
 
   belongs_to :book
+  has_many :running_ciphers
 
   after_destroy :kill_ciphers
   before_save :sanitize_text
@@ -61,8 +62,6 @@ class Page < ActiveRecord::Base
       end
       adder = @done ? t : "#{t}-"
     lines << adder
-    puts "CHARS: #{chars.inspect}"
-    puts "T #{t.inspect}"
     chars = chars.sub(t, '')
     end
     lines

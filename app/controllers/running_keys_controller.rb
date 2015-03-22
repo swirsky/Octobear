@@ -95,7 +95,7 @@ class RunningKeysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def running_key_params
-      params.require(:running_key).permit(:user_id, :input, :group_length, :page, :line, :book_id)
+      params.require(:running_key).permit(:user_id, :input, :group_length, :page_number, :line, :book_id)
     end
 
     def book_id
