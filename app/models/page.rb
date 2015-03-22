@@ -47,9 +47,9 @@ class Page < ActiveRecord::Base
          if cap.match(/[\n\r\s\,\.\!\?]/)
            case i
            when 0
-             ex += cap
+             @done = true
            when 1
-             ex += chars[self.line_length+ex.length..self.line_length+1+ex.length]
+             ex += cap
            end
             @done = true
          end
@@ -61,6 +61,8 @@ class Page < ActiveRecord::Base
       end
       adder = @done ? t : "#{t}-"
     lines << adder
+    puts "CHARS: #{chars.inspect}"
+    puts "T #{t.inspect}"
     chars = chars.sub(t, '')
     end
     lines
