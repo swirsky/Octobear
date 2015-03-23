@@ -1,3 +1,3 @@
 == README
 
-Just a simple program with a link shortener and some user login functionality.
+A couple of tools I've been working on for use in a Pathfinder game.
