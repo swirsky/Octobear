@@ -29,8 +29,8 @@ class NpcsController < ApplicationController
   end
 
   def import
-    NPC.import(params[:file], @campaign.id)
-    redirect_to root_url, notice: "Products imported."
+    Npc.import(params[:file], @campaign.id)
+    redirect_to npcs_path(campaign_id:@campaign.id), notice: "NPCs imported."
   end
 
   # POST /npcs

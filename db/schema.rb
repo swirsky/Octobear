@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324185557) do
+ActiveRecord::Schema.define(version: 20150324213406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150324185557) do
     t.integer  "campaign_id",  null: false
     t.integer  "leader_id"
     t.string   "description"
-    t.string   "type"
+    t.string   "main_type"
     t.string   "subtype"
     t.string   "headquarters"
     t.string   "influence"

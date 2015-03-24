@@ -25,8 +25,8 @@ class FactionsController < ApplicationController
   end
 
   def import
-    NPC.import(params[:file], @campaign.id)
-    redirect_to root_url, notice: "Products imported."
+    Faction.import(params[:file], @campaign.id)
+    redirect_to factions_path(campaign_id:@campaign.id), notice: "Factions imported."
   end
 
   # POST /factions
@@ -77,10 +77,11 @@ class FactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def faction_params
-      params.require(:faction).permit(:name, :campaign_id, :leader_id, :description, :type, :subtype, :headquarters, :influence, :strength, :secret)
+      params.require(:faction).permit(:name, :campaign_id, :leader_id, :description, :main_type, :subtype, :headquarters, :influence, :strength, :secret)
     end
 
     def set_campaign
+      puts "SETTING CAMPAIGN! CAMPAIGN ID: #{campaign_id}"
       if campaign_id
         @campaign = Campaign.find(campaign_id)
       end

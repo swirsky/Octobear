@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :chases, dependent: :destroy
   has_many :books, dependent: :destroy
   has_many :running_keys, dependent: :destroy
+  has_many :campaigns, dependent: :destroy
   
   #password stuff / account setup
   attr_accessor :password, :salt
