@@ -1,0 +1,42 @@
+<h1>Listing NPCs for <%= @campaign.name %></h1>
+<%= link_to "Back", @campaign %>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Campaign</th>
+      <th>Description</th>
+      <th>Race</th>
+      <th>Gender</th>
+      <th>Location</th>
+      <th>Notes</th>
+      <th>Influence</th>
+      <th>Strength</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @npcs.each do |npc| %>
+      <tr>
+        <td><%= npc.name %></td>
+        <td><%= npc.campaign_id %></td>
+        <td><%= npc.description %></td>
+        <td><%= npc.race %></td>
+        <td><%= npc.gender %></td>
+        <td><%= npc.location %></td>
+        <td><%= npc.notes %></td>
+        <td><%= npc.influence %></td>
+        <td><%= npc.strength %></td>
+        <td><%= link_to 'Show', npc %></td>
+        <td><%= link_to 'Edit', edit_npc_path(npc) %></td>
+        <td><%= link_to 'Destroy', npc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Npc', new_npc_path %>

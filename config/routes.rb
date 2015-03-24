@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  resources :factions do
+    collection { post :import }
+  end
+
+  resources :npc_relations
+
+  resources :npcs do
+    collection { post :import }
+  end
+
+  resources :campaigns
+
   resources :pages
 
   resources :books
@@ -26,6 +38,14 @@ Rails.application.routes.draw do
   get ':slug' => 'links#show'
 
   Rails.application.routes.draw do
+  resources :factions
+
+  resources :npc_relations
+
+  resources :npcs
+
+  resources :campaigns
+
   resources :pages
 
   resources :books

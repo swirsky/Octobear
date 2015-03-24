@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322212214) do
+ActiveRecord::Schema.define(version: 20150324185557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 20150322212214) do
     t.string   "title",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "campaigns", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.integer  "user_id",     null: false
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "casters", force: :cascade do |t|
@@ -42,6 +50,21 @@ ActiveRecord::Schema.define(version: 20150322212214) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "factions", force: :cascade do |t|
+    t.string   "name",         null: false
+    t.integer  "campaign_id",  null: false
+    t.integer  "leader_id"
+    t.string   "description"
+    t.string   "type"
+    t.string   "subtype"
+    t.string   "headquarters"
+    t.string   "influence"
+    t.string   "strength"
+    t.boolean  "secret"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "links", force: :cascade do |t|
     t.string   "url",        null: false
     t.string   "slug"
@@ -51,6 +74,30 @@ ActiveRecord::Schema.define(version: 20150322212214) do
   end
 
   add_index "links", ["slug"], name: "index_links_on_slug", unique: true, using: :btree
+
+  create_table "npc_relations", force: :cascade do |t|
+    t.integer  "campaign_id",                     null: false
+    t.integer  "npc1_id",                         null: false
+    t.integer  "npc2_id",                         null: false
+    t.string   "status",      default: "Neutral", null: false
+    t.string   "notes"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  create_table "npcs", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.integer  "campaign_id", null: false
+    t.string   "description"
+    t.string   "race"
+    t.string   "gender"
+    t.string   "location"
+    t.string   "notes"
+    t.string   "influence"
+    t.string   "strength"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "obstacles", force: :cascade do |t|
     t.string   "primary_skill",   null: false

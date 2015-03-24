@@ -1,0 +1,57 @@
+<%= form_for(@faction) do |f| %>
+  <% if @faction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@faction.errors.count, "error") %> prohibited this faction from being saved:</h2>
+
+      <ul>
+      <% @faction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :campaign_id %><br>
+    <%= f.number_field :campaign_id %>
+  </div>
+  <div class="field">
+    <%= f.label :leader_id %><br>
+    <%= f.number_field :leader_id %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :subtype %><br>
+    <%= f.text_field :subtype %>
+  </div>
+  <div class="field">
+    <%= f.label :headquarters %><br>
+    <%= f.text_field :headquarters %>
+  </div>
+  <div class="field">
+    <%= f.label :influence %><br>
+    <%= f.text_field :influence %>
+  </div>
+  <div class="field">
+    <%= f.label :strength %><br>
+    <%= f.text_field :strength %>
+  </div>
+  <div class="field">
+    <%= f.label :secret %><br>
+    <%= f.text_field :secret %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

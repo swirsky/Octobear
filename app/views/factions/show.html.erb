@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @faction.name %>
+</p>
+
+<p>
+  <strong>Campaign:</strong>
+  <%= @faction.campaign_id %>
+</p>
+
+<p>
+  <strong>Leader:</strong>
+  <%= @faction.leader_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @faction.description %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @faction.type %>
+</p>
+
+<p>
+  <strong>Subtype:</strong>
+  <%= @faction.subtype %>
+</p>
+
+<p>
+  <strong>Headquarters:</strong>
+  <%= @faction.headquarters %>
+</p>
+
+<p>
+  <strong>Influence:</strong>
+  <%= @faction.influence %>
+</p>
+
+<p>
+  <strong>Strength:</strong>
+  <%= @faction.strength %>
+</p>
+
+<p>
+  <strong>Secret:</strong>
+  <%= @faction.secret %>
+</p>
+
+<%= link_to 'Edit', edit_faction_path(@faction) %> |
+<%= link_to 'Back', factions_path %>

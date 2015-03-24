@@ -1,0 +1,37 @@
+<%= form_for(@npc_relation) do |f| %>
+  <% if @npc_relation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@npc_relation.errors.count, "error") %> prohibited this npc_relation from being saved:</h2>
+
+      <ul>
+      <% @npc_relation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :campaign_id %><br>
+    <%= f.number_field :campaign_id %>
+  </div>
+  <div class="field">
+    <%= f.label :npc1_id %><br>
+    <%= f.number_field :npc1_id %>
+  </div>
+  <div class="field">
+    <%= f.label :npc2_id %><br>
+    <%= f.number_field :npc2_id %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_field :notes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

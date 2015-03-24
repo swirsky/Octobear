@@ -1,0 +1,21 @@
+<p>
+  <strong>Name:</strong>
+  <%= @campaign.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @campaign.description %>
+</p>
+
+<p>
+<strong><%= link_to "NPCs", npcs_path(campaign_id:@campaign.id) %></strong>
+  </p>
+
+<p>
+<strong><%= link_to "Factions", factions_path(campaign_id:@campaign.id) %></strong>
+</p>
+
+
+<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+<%= link_to 'Back', campaigns_path %>

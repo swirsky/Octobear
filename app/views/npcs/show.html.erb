@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @npc.name %>
+</p>
+
+<p>
+  <strong>Campaign:</strong>
+  <%= @npc.campaign_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @npc.description %>
+</p>
+
+<p>
+  <strong>Race:</strong>
+  <%= @npc.race %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @npc.gender %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @npc.location %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @npc.notes %>
+</p>
+
+<p>
+  <strong>Influence:</strong>
+  <%= @npc.influence %>
+</p>
+
+<p>
+  <strong>Strength:</strong>
+  <%= @npc.strength %>
+</p>
+
+<%= link_to 'Edit', edit_npc_path(@npc) %> |
+<%= link_to 'Back', npcs_path %>

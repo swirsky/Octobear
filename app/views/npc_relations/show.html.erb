@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Campaign:</strong>
+  <%= @npc_relation.campaign_id %>
+</p>
+
+<p>
+  <strong>Npc1:</strong>
+  <%= @npc_relation.npc1_id %>
+</p>
+
+<p>
+  <strong>Npc2:</strong>
+  <%= @npc_relation.npc2_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @npc_relation.status %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @npc_relation.notes %>
+</p>
+
+<%= link_to 'Edit', edit_npc_relation_path(@npc_relation) %> |
+<%= link_to 'Back', npc_relations_path %>

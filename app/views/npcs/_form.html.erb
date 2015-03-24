@@ -1,0 +1,53 @@
+<%= form_for(@npc) do |f| %>
+  <% if @npc.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@npc.errors.count, "error") %> prohibited this npc from being saved:</h2>
+
+      <ul>
+      <% @npc.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :campaign_id %><br>
+    <%= f.number_field :campaign_id %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :race %><br>
+    <%= f.text_field :race %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br>
+    <%= f.text_field :gender %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br>
+    <%= f.text_field :location %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_field :notes %>
+  </div>
+  <div class="field">
+    <%= f.label :influence %><br>
+    <%= f.text_field :influence %>
+  </div>
+  <div class="field">
+    <%= f.label :strength %><br>
+    <%= f.text_field :strength %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

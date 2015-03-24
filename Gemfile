@@ -34,6 +34,10 @@ gem 'devise'
 #role model for roles_mask
 gem 'role_model'
 
+#roo for imports
+gem 'roo'
+gem 'iconv'
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 

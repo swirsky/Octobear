@@ -1,0 +1,38 @@
+<h1>Listing Npc Relations for <%= @campaign.name %></h1>
+<%= link_to "Back", @campaign %>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Campaign</th>
+      <th>Npc1</th>
+      <th>Npc2</th>
+      <th>Status</th>
+      <th>Notes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @npc_relations.each do |npc_relation| %>
+      <tr>
+        <%
+          npc1 = npc_relation.npc1
+          npc2 = npc_relation.npc2
+        %>
+        <td><%= npc_relation.campaign_id %></td>
+        <td><%= link_to npc1.name, npc1 %></td>
+        <td><%= link_to npc2.name, npc2 %></td>
+        <td><%= npc_relation.status %></td>
+        <td><%= npc_relation.notes %></td>
+        <td><%= link_to 'Show', npc_relation %></td>
+        <td><%= link_to 'Edit', edit_npc_relation_path(npc_relation) %></td>
+        <td><%= link_to 'Destroy', npc_relation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Npc relation', new_npc_relation_path %>

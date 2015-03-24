@@ -1,0 +1,49 @@
+<h1>Listing Factions for <%= @campaign.name %></h1>
+<%= link_to "Back", @campaign %>
+
+<h2>Import Factions</h2>
+
+<%= form_tag import_factions_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Leader</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Subtype</th>
+      <th>Headquarters</th>
+      <th>Influence</th>
+      <th>Strength</th>
+      <th>Secret</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @factions.each do |faction| %>
+      <tr>
+        <td><%= faction.name %></td>
+        <td><%= faction.leader_name %></td>
+        <td><%= faction.description %></td>
+        <td><%= faction.type %></td>
+        <td><%= faction.subtype %></td>
+        <td><%= faction.headquarters %></td>
+        <td><%= faction.influence %></td>
+        <td><%= faction.strength %></td>
+        <td><%= faction.secret %></td>
+        <td><%= link_to 'Show', faction %></td>
+        <td><%= link_to 'Edit', edit_faction_path(faction) %></td>
+        <td><%= link_to 'Destroy', faction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Faction', new_faction_path %>
