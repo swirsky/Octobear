@@ -11,17 +11,14 @@
     </div>
   <% end %>
 
+    <%= f.hidden_field :campaign_id, value:@campaign.id %>
   <div class="field">
-    <%= f.label :campaign_id %><br>
-    <%= f.number_field :campaign_id %>
+    <%= f.label :npc1 %><br>
+    <%= f.select_field :npc1_id, options_from_collection_for_select(@npcs, 'id', 'name') %>
   </div>
   <div class="field">
-    <%= f.label :npc1_id %><br>
-    <%= f.number_field :npc1_id %>
-  </div>
-  <div class="field">
-    <%= f.label :npc2_id %><br>
-    <%= f.number_field :npc2_id %>
+    <%= f.label :npc2 %><br>
+    <%= f.select_field :npc2_id, options_from_collection_for_select(@npcs, 'id', 'name') %>
   </div>
   <div class="field">
     <%= f.label :status %><br>

@@ -1,11 +1,18 @@
 <h1>Listing NPCs for <%= @campaign.name %></h1>
 <%= link_to "Back", @campaign %>
 
+<h2>Import NPCs</h2>
+<%= form_tag import_npcs_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= hidden_field_tag :campaign_id, value:@campaign.id %>
+  <%= submit_tag "Import" %>
+<% end %>
+<h2>Download NPCs: <%= link_to "CSV", npcs_path(campaign_id:@campaign.id, format: "csv") %></h2>
+
 <table class='table table-hover'>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Campaign</th>
       <th>Description</th>
       <th>Race</th>
       <th>Gender</th>
@@ -21,7 +28,6 @@
     <% @npcs.each do |npc| %>
       <tr>
         <td><%= npc.name %></td>
-        <td><%= npc.campaign_id %></td>
         <td><%= npc.description %></td>
         <td><%= npc.race %></td>
         <td><%= npc.gender %></td>
@@ -39,4 +45,4 @@
 
 <br>
 
-<%= link_to 'New Npc', new_npc_path %>
+<%= link_to 'New Npc', new_npc_path(campaign_id:@campaign.id) %>

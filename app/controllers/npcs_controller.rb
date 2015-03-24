@@ -7,6 +7,11 @@ class NpcsController < ApplicationController
   # GET /npcs.json
   def index
     @npcs = @campaign.npcs
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @npcs.to_csv }
+    end
   end
 
   # GET /npcs/1

@@ -15,13 +15,10 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+    <%= f.hidden_field :campaign_id, value:@campaign.id %>
   <div class="field">
-    <%= f.label :campaign_id %><br>
-    <%= f.number_field :campaign_id %>
-  </div>
-  <div class="field">
-    <%= f.label :leader_id %><br>
-    <%= f.number_field :leader_id %>
+    <%= f.label :leader %><br>
+    <%= f.select_field :leader_id, options_from_collection_for_select(@npcs, 'id', 'name') %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
@@ -41,15 +38,15 @@
   </div>
   <div class="field">
     <%= f.label :influence %><br>
-    <%= f.text_field :influence %>
+    <%= f.select_field :influence, options_for_select(CampaignHelper::INFLUENCE_OPTIONS) %>
   </div>
   <div class="field">
     <%= f.label :strength %><br>
-    <%= f.text_field :strength %>
+    <%= f.select_field :strength, options_for_select(CampaignHelper::STRENGTH_OPTIONS) %>
   </div>
   <div class="field">
     <%= f.label :secret %><br>
-    <%= f.text_field :secret %>
+    <%= f.boolean_field :secret %>
   </div>
   <div class="actions">
     <%= f.submit %>

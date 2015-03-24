@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Campaign:</strong>
   <%= @npc_relation.campaign_id %>
@@ -26,4 +24,4 @@
 </p>
 
 <%= link_to 'Edit', edit_npc_relation_path(@npc_relation) %> |
-<%= link_to 'Back', npc_relations_path %>
+<%= link_to 'Back', npc_relations_path(campaign_id:@campaign.id) %>

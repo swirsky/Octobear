@@ -15,21 +15,18 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :campaign_id %><br>
-    <%= f.number_field :campaign_id %>
-  </div>
+    <%= f.hidden_field :campaign_id, value:@campaign.id %>
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
   <div class="field">
     <%= f.label :race %><br>
-    <%= f.text_field :race %>
+    <%= f.select_field :race, options_for_select(CampaignHelper::RACE_OPTIONS) %>
   </div>
   <div class="field">
     <%= f.label :gender %><br>
-    <%= f.text_field :gender %>
+    <%= f.select_field :gender, options_for_select(CampaignHelper::GENDER_OPTIONS) %>
   </div>
   <div class="field">
     <%= f.label :location %><br>
@@ -41,11 +38,11 @@
   </div>
   <div class="field">
     <%= f.label :influence %><br>
-    <%= f.text_field :influence %>
+    <%= f.select_field :influence, options_for_select(CampaignHelper::INFLUENCE_OPTIONS) %>
   </div>
   <div class="field">
     <%= f.label :strength %><br>
-    <%= f.text_field :strength %>
+    <%= f.select_field :strength, options_for_select(CampaignHelper::STRENGTH_OPTIONS) %>
   </div>
   <div class="actions">
     <%= f.submit %>

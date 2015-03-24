@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @faction.name %>
@@ -51,4 +49,4 @@
 </p>
 
 <%= link_to 'Edit', edit_faction_path(@faction) %> |
-<%= link_to 'Back', factions_path %>
+<%= link_to 'Back', factions_path(campaign_id:@campaign.id) %>

@@ -1,5 +1,6 @@
 class FactionsController < ApplicationController
   before_action :set_faction, only: [:show, :edit, :update, :destroy]
+  before_action :set_npcs, only: [:edit, :new]
 
   before_filter :ensure_current_user, :set_campaign
 
@@ -98,5 +99,9 @@ class FactionsController < ApplicationController
       else
         nil
       end
+    end
+
+    def set_npcs
+      @npcs = @campaign.npcs
     end
 end
