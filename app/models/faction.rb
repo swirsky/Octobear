@@ -9,6 +9,8 @@ class Faction < ActiveRecord::Base
   belongs_to :location
   has_many :npcs, through: :allegiances
 
+  before_save :check_location
+
   def self.import(file, campaign_id)
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(1)
@@ -37,7 +39,7 @@ class Faction < ActiveRecord::Base
     if name && Npc.find_by(name:name, campaign_id:self.campaign_id)
       return Npc.find_by(name:name, campaign_id:self.campaign_id).id
     elsif self.leader
-      self.leader.id
+      return self.leader.id
     else
       return nil
     end
@@ -70,4 +72,5 @@ class Faction < ActiveRecord::Base
     else
       self.location_id = nil
     end
+  end
 end
