@@ -15,7 +15,7 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <%= f.hidden_field :campaign_id, @campaign.id %>
+  <%= f.hidden_field :campaign_id, value:@campaign.id %>
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
