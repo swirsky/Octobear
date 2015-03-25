@@ -8,6 +8,11 @@ class FactionsController < ApplicationController
   # GET /factions.json
   def index
     @factions = @campaign.factions
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @factions.to_csv }
+    end
   end
 
   # GET /factions/1

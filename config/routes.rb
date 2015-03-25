@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :locations
+  resources :locations do
+    collection {post :import }
+  end
 
   resources :allegiances
 

@@ -7,6 +7,11 @@ class LocationsController < ApplicationController
   # GET /locations.json
   def index
     @locations = @campaign.locations
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @locations.to_csv }
+    end
   end
 
   # GET /locations/1
@@ -21,6 +26,11 @@ class LocationsController < ApplicationController
 
   # GET /locations/1/edit
   def edit
+  end
+
+  def import
+    Location.import(params[:file], @campaign.id)
+    redirect_to locations_path(campaign_id:@campaign.id), notice: "Locations imported."
   end
 
   # POST /locations
