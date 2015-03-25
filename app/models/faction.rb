@@ -61,4 +61,13 @@ class Faction < ActiveRecord::Base
     end
   end
 
+  def check_location
+    loc = nil
+    loc = Location.find_by(id:self.location_id) if self.location_id
+    loc = Location.find_by(name:self.headquarters, campaign_id:self.campaign_id) if !loc && self.headquarters
+    if loc
+      self.headquarters_name = loc.name
+    else
+      self.location_id = nil
+    end
 end
