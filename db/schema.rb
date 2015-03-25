@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325145234) do
+ActiveRecord::Schema.define(version: 20150325195647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,7 +77,8 @@ ActiveRecord::Schema.define(version: 20150325145234) do
     t.integer  "location_id"
   end
 
-  add_index "factions", ["campaign_id", "main_type"], name: "index_factions_on_campaign_id_and_main_type", using: :btree
+  add_index "factions", ["campaign_id"], name: "index_factions_on_campaign_id", using: :btree
+  add_index "factions", ["location_id"], name: "index_factions_on_location_id", using: :btree
 
   create_table "links", force: :cascade do |t|
     t.string   "url",        null: false
@@ -100,6 +101,7 @@ ActiveRecord::Schema.define(version: 20150325145234) do
   end
 
   add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
+  add_index "locations", ["parent_id"], name: "index_locations_on_parent_id", using: :btree
 
   create_table "npc_relations", force: :cascade do |t|
     t.integer  "campaign_id",                     null: false
@@ -111,7 +113,8 @@ ActiveRecord::Schema.define(version: 20150325145234) do
     t.datetime "updated_at",                      null: false
   end
 
-  add_index "npc_relations", ["npc1_id", "npc2_id", "campaign_id"], name: "index_npc_relations_on_npc1_id_and_npc2_id_and_campaign_id", using: :btree
+  add_index "npc_relations", ["campaign_id"], name: "index_npc_relations_on_campaign_id", using: :btree
+  add_index "npc_relations", ["npc1_id", "npc2_id"], name: "index_npc_relations_on_npc1_id_and_npc2_id", using: :btree
 
   create_table "npcs", force: :cascade do |t|
     t.string   "name",          null: false
@@ -129,6 +132,7 @@ ActiveRecord::Schema.define(version: 20150325145234) do
   end
 
   add_index "npcs", ["campaign_id"], name: "index_npcs_on_campaign_id", using: :btree
+  add_index "npcs", ["location_id"], name: "index_npcs_on_location_id", using: :btree
 
   create_table "obstacles", force: :cascade do |t|
     t.string   "primary_skill",   null: false
