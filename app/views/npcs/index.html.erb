@@ -1,7 +1,7 @@
 <h1>Listing NPCs for <%= @campaign.name %></h1>
-<%= link_to "Back", @campaign %>
+<p><%= link_to "Back", @campaign %></p>
 
-<br />
+<br /><br />
 <p><strong>Import NPCs</strong></p>
 <%= form_tag import_npcs_path, multipart: true do %>
   <%= file_field_tag :file %>
@@ -28,7 +28,7 @@
   <tbody>
     <% @npcs.each do |npc| %>
       <tr>
-        <td><%= npc.name %></td>
+        <td><%= link_to npc.name, npc %></td>
         <td><%= npc.description %></td>
         <td><%= npc.race %></td>
         <td><%= npc.gender %></td>

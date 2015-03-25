@@ -28,7 +28,7 @@
   <tbody>
     <% @factions.each do |faction| %>
       <tr>
-        <td><%= faction.name %></td>
+        <td><%= link_to faction.name, faction %></td>
         <td><% if faction.leader %> <%= link_to faction.leader_name, faction.leader %> <% end %></td>
         <td><%= faction.description %></td>
         <td><%= faction.main_type %></td>
