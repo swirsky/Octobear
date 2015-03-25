@@ -1,5 +1,7 @@
 <div style='width:50%;'>
-<%= render partial: "allegiances/index", locals: {list_name:'NPC', allegiances:@faction.allegiances, base:@faction} %>
+  <div class='navbar navbar-right panel panel-default'>
+    <%= render partial: "allegiances/index", locals: {list_name:'NPC', allegiances:@faction.allegiances, base:@faction} %>
+  </div>
 <p>
   <strong>Name:</strong>
   <%= @faction.name %>
