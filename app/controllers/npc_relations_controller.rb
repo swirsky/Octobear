@@ -3,6 +3,7 @@ class NpcRelationsController < ApplicationController
   
   before_action :set_npc_relation, only: [:show, :edit, :update, :destroy]
   before_action :set_npcs, only: [:edit, :new]
+  before_action :set_npc, only: [:new]
 
 
   # GET /npc_relations
@@ -99,5 +100,9 @@ class NpcRelationsController < ApplicationController
 
     def set_npcs
       @npcs = @campaign.npcs
+    end
+
+    def set_npc
+      @npc = Npc.find_by(id:params[:npc_id])
     end
 end

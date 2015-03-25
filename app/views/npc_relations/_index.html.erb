@@ -1,0 +1,32 @@
+<h4>NPC Relations</h4>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Other NPC</th>
+      <th>Status</th>
+      <th>Notes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% npc.npc_relations.each do |npc_relation| %>
+      <tr>
+        <%
+          npc2 = npc_relation.other_npc(npc)
+        %>
+        <td><%= link_to npc2.name, npc2 %></td>
+        <td><%= npc_relation.status %></td>
+        <td><%= npc_relation.notes %></td>
+        <td><%= link_to 'Show', npc_relation %></td>
+        <td><%= link_to 'Edit', edit_npc_relation_path(npc_relation) %></td>
+        <td><%= link_to 'Destroy', npc_relation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Npc relation', new_npc_relation_path(npc_id:npc.id) %>

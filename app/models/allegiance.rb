@@ -3,11 +3,10 @@ class Allegiance < ActiveRecord::Base
   belongs_to :faction
   belongs_to :npc
 
-  def get_friend(list_name)
-    case list_name
-    when "Faction"
+  def get_friend(base)
+    if base.is_a?(Npc)
       self.faction.name
-    when "NPC"
+    else
       self.npc.name
     end
   end

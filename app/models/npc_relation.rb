@@ -8,4 +8,8 @@ class NpcRelation < ActiveRecord::Base
   def npc2
     NPC.find_by(id:self.npc2_id)
   end
+
+  def other_npc(npc)
+    [npc1, npc2] - npc
+  end
 end

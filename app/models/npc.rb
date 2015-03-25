@@ -9,6 +9,10 @@ class Npc < ActiveRecord::Base
   has_many :factions, through: :allegiances
   validates_presence_of :name, :campaign_id
 
+  def npc_relations
+    NpcRelation.where(npc1_id:self.id) + NpcRelation.where(npc2_id:self.id)
+  end
+
   def self.import(file, campaign_id)
     spreadsheet = open_spreadsheet(file)
     puts spreadsheet.inspect
