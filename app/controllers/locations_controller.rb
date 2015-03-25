@@ -33,7 +33,7 @@ class LocationsController < ApplicationController
         format.html { redirect_to @location, notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, location: @location }
       else
-        format.html { render :new }
+        format.html { render :new, campaign_id:@campaign.id }
         format.json { render json: @location.errors, status: :unprocessable_entity }
       end
     end
@@ -58,7 +58,7 @@ class LocationsController < ApplicationController
   def destroy
     @location.destroy
     respond_to do |format|
-      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
+      format.html { redirect_to locations_url(campaign_id:@campaign.id), notice: 'Location was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,7 +71,7 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:name, :campaign_id, :description, :notes)
+      params.require(:location).permit(:name, :campaign_id, :parent_id, :description, :notes)
     end
 
     def set_campaign

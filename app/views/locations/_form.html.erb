@@ -24,6 +24,10 @@
     <%= f.label :notes %><br>
     <%= f.text_field :notes %>
   </div>
+  <div class="field">
+    <%= f.label "Contained in another location?" %><br>
+    <%= f.select :parent_id, options_from_collection_for_select((@campaign.locations - [@location]), 'id', 'name'), include_blank: true %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
