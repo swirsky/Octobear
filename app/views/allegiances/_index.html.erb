@@ -1,0 +1,28 @@
+<div class='navbar navbar-right panel panel-default'>
+  <h4>Allegiances</h4>
+
+  <table class='table table-hover'>
+    <thead>
+      <tr>
+        <th><%= list_name %></th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <% allegiances.each do |allegiance| %>
+      <tr>
+      <td><%= link_to "#{allegiance.get_friend(list_name)}: #{allegiance.status}", allegiance %></td>
+      <td><%= link_to 'Show', allegiance %></td>
+      <td><%= link_to 'Edit', edit_allegiance_path(allegiance) %></td>
+      <td><%= link_to 'Destroy', allegiance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+    </tbody>
+  </table>
+  <% if base.is_a?(Faction) %>
+    <%= link_to "New Allegiance", new_allegiance_path(faction_id:base.id) %>
+  <% else %>
+    <%= link_to "New Allegiance", new_allegiance_path(npc_id:base.id) %>
+  <% end %>
+</div>

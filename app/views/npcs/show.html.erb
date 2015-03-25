@@ -1,3 +1,6 @@
+<div style='width:50%;'>
+  <%= render partial: "allegiances/index", locals: {list_name:'NPC', allegiances:@npc.allegiances, base:@npc} %>
+
 <p>
   <strong>Name:</strong>
   <%= @npc.name %>
@@ -45,3 +48,4 @@
 
 <%= link_to 'Edit', edit_npc_path(@npc) %> |
 <%= link_to 'Back', npcs_path(campaign_id:@campaign.id) %>
+</div>

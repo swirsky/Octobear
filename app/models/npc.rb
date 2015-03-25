@@ -5,6 +5,8 @@ class Npc < ActiveRecord::Base
 
   belongs_to :campaign
   has_many :npc_relations
+  has_many :allegiances
+  has_many :factions, through: :allegiances
   validates_presence_of :name, :campaign_id
 
   def self.import(file, campaign_id)

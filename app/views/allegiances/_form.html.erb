@@ -1,0 +1,37 @@
+<%= form_for(@allegiance) do |f| %>
+  <% if @allegiance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@allegiance.errors.count, "error") %> prohibited this allegiance from being saved:</h2>
+
+      <ul>
+      <% @allegiance.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if @npc %>
+  <%= f.hidden_field :npc_id, value:@npc.id %>
+  <div class="field">
+    <%= f.label :faction %><br>
+    <%= f.select :faction_id, options_from_collection_for_select(@npc.campaign.factions, 'id', 'name') %>
+  </div>
+  <% elsif @faction %>
+  <%= f.hidden_field :faction_id, value:@faction.id %>
+  <div class="field">
+    <%= f.label :npc %><br>
+    <%= f.select :npc_id, options_from_collection_for_select(@faction.campaign.npcs, 'id', 'name') %>
+  </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_area :notes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

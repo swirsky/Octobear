@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :allegiances
+
   resources :factions do
     collection { post :import }
   end
@@ -38,6 +40,8 @@ Rails.application.routes.draw do
   get ':slug' => 'links#show'
 
   Rails.application.routes.draw do
+  resources :allegiances
+
   resources :factions
 
   resources :npc_relations

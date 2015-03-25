@@ -1,17 +1,16 @@
+<div style='width:50%;'>
+<%= render partial: "allegiances/index", locals: {list_name:'Faction', allegiances:@faction.allegiances, base:@faction} %>
 <p>
   <strong>Name:</strong>
   <%= @faction.name %>
 </p>
 
-<p>
-  <strong>Campaign:</strong>
-  <%= @faction.campaign_id %>
-</p>
-
+<% if @faction.leader %>
 <p>
   <strong>Leader:</strong>
-  <%= @faction.leader_id %>
-</p>
+  <%= link_to @faction.leader_name, @faction.leader %>
+  </p>
+<% end %>
 
 <p>
   <strong>Description:</strong>
@@ -50,3 +49,4 @@
 
 <%= link_to 'Edit', edit_faction_path(@faction) %> |
 <%= link_to 'Back', factions_path(campaign_id:@campaign.id) %>
+</div>

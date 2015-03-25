@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324213406) do
+ActiveRecord::Schema.define(version: 20150324215708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "allegiances", force: :cascade do |t|
+    t.integer  "npc_id",     null: false
+    t.integer  "faction_id", null: false
+    t.string   "status"
+    t.string   "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "allegiances", ["npc_id", "faction_id"], name: "index_allegiances_on_npc_id_and_faction_id", using: :btree
 
   create_table "books", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -65,6 +76,8 @@ ActiveRecord::Schema.define(version: 20150324213406) do
     t.datetime "updated_at",   null: false
   end
 
+  add_index "factions", ["campaign_id", "main_type"], name: "index_factions_on_campaign_id_and_main_type", using: :btree
+
   create_table "links", force: :cascade do |t|
     t.string   "url",        null: false
     t.string   "slug"
@@ -85,6 +98,8 @@ ActiveRecord::Schema.define(version: 20150324213406) do
     t.datetime "updated_at",                      null: false
   end
 
+  add_index "npc_relations", ["npc1_id", "npc2_id", "campaign_id"], name: "index_npc_relations_on_npc1_id_and_npc2_id_and_campaign_id", using: :btree
+
   create_table "npcs", force: :cascade do |t|
     t.string   "name",        null: false
     t.integer  "campaign_id", null: false
@@ -98,6 +113,8 @@ ActiveRecord::Schema.define(version: 20150324213406) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "npcs", ["campaign_id"], name: "index_npcs_on_campaign_id", using: :btree
 
   create_table "obstacles", force: :cascade do |t|
     t.string   "primary_skill",   null: false

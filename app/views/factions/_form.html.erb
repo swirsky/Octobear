@@ -18,7 +18,7 @@
     <%= f.hidden_field :campaign_id, value:@campaign.id %>
   <div class="field">
     <%= f.label :leader %><br>
-    <%= f.select_field :leader_id, options_from_collection_for_select(@npcs, 'id', 'name') %>
+    <%= f.select :leader_id, options_from_collection_for_select(@npcs, 'id', 'name') %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
@@ -38,11 +38,11 @@
   </div>
   <div class="field">
     <%= f.label :influence %><br>
-    <%= f.select_field :influence, options_for_select(CampaignsHelper::INFLUENCE_OPTIONS) %>
+    <%= f.select :influence, options_for_select(CampaignsHelper::INFLUENCE_OPTIONS, @faction.influence) %>
   </div>
   <div class="field">
     <%= f.label :strength %><br>
-    <%= f.select_field :strength, options_for_select(CampaignsHelper::STRENGTH_OPTIONS) %>
+    <%= f.select :strength, options_for_select(CampaignsHelper::STRENGTH_OPTIONS, @faction.strength) %>
   </div>
   <div class="field">
     <%= f.label :secret %><br>

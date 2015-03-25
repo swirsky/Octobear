@@ -5,6 +5,8 @@ class Faction < ActiveRecord::Base
   validates_presence_of :name, :campaign_id
 
   belongs_to :campaign
+  has_many :allegiances
+  has_many :npcs, through: :allegiances
 
   def self.import(file, campaign_id)
     spreadsheet = open_spreadsheet(file)
