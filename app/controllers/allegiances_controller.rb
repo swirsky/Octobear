@@ -73,11 +73,11 @@ class AllegiancesController < ApplicationController
     end
 
     def set_faction
-      @faction = Allegiance.faction
+      @faction = @allegiance.faction
     end
 
     def set_npc
-      @npc = Allegiance.npc
+      @npc = @allegiance.npc
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

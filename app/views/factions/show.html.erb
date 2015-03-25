@@ -1,5 +1,5 @@
 <div style='width:50%;'>
-<%= render partial: "allegiances/index", locals: {list_name:'Faction', allegiances:@faction.allegiances, base:@faction} %>
+<%= render partial: "allegiances/index", locals: {list_name:'NPC', allegiances:@faction.allegiances, base:@faction} %>
 <p>
   <strong>Name:</strong>
   <%= @faction.name %>
@@ -29,7 +29,11 @@
 
 <p>
   <strong>Headquarters:</strong>
+<% if @faction.location.nil? %>
   <%= @faction.headquarters %>
+<% else %>
+  <%= link_to @faction.headquarters, @faction.location %>
+<% end %>
 </p>
 
 <p>

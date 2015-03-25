@@ -5,7 +5,8 @@ class Faction < ActiveRecord::Base
   validates_presence_of :name, :campaign_id
 
   belongs_to :campaign
-  has_many :allegiances
+  has_many :allegiances, dependent: :destroy
+  belongs_to :location
   has_many :npcs, through: :allegiances
 
   def self.import(file, campaign_id)
@@ -33,7 +34,6 @@ class Faction < ActiveRecord::Base
   end
 
   def find_leader(name=nil)
-    puts "FINDING LEADER! NAME:#{name}"
     if name && Npc.find_by(name:name, campaign_id:self.campaign_id)
       return Npc.find_by(name:name, campaign_id:self.campaign_id).id
     elsif self.leader
@@ -60,4 +60,5 @@ class Faction < ActiveRecord::Base
       end
     end
   end
+
 end

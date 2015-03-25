@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
-
+<h3>Allegiance between: <br /> <%= link_to @npc.name, @npc %> and <%= link_to @faction.name, @faction %> </h3>
+<p>
+  <strong>Status:</strong>
+  <%= @allegiance.status %>
+  </p>
+<p>
+  <strong>Notes:</strong>
+  <%= @allegiance.notes %>
+</p>
 <%= link_to 'Edit', edit_allegiance_path(@allegiance) %> |
-<%= link_to 'Back', allegiances_path %>
+<%= link_to 'Back', :back %>

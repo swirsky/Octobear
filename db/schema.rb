@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324215708) do
+ActiveRecord::Schema.define(version: 20150325132551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150324215708) do
     t.boolean  "secret"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "location_id"
   end
 
   add_index "factions", ["campaign_id", "main_type"], name: "index_factions_on_campaign_id_and_main_type", using: :btree
@@ -88,6 +89,17 @@ ActiveRecord::Schema.define(version: 20150324215708) do
 
   add_index "links", ["slug"], name: "index_links_on_slug", unique: true, using: :btree
 
+  create_table "locations", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.integer  "campaign_id", null: false
+    t.string   "description"
+    t.string   "notes"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
+
   create_table "npc_relations", force: :cascade do |t|
     t.integer  "campaign_id",                     null: false
     t.integer  "npc1_id",                         null: false
@@ -101,17 +113,18 @@ ActiveRecord::Schema.define(version: 20150324215708) do
   add_index "npc_relations", ["npc1_id", "npc2_id", "campaign_id"], name: "index_npc_relations_on_npc1_id_and_npc2_id_and_campaign_id", using: :btree
 
   create_table "npcs", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.integer  "campaign_id", null: false
+    t.string   "name",          null: false
+    t.integer  "campaign_id",   null: false
     t.string   "description"
     t.string   "race"
     t.string   "gender"
-    t.string   "location"
+    t.string   "location_name"
     t.string   "notes"
     t.string   "influence"
     t.string   "strength"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "location_id"
   end
 
   add_index "npcs", ["campaign_id"], name: "index_npcs_on_campaign_id", using: :btree

@@ -4,10 +4,13 @@ class Npc < ActiveRecord::Base
   include CampaignsHelper
 
   belongs_to :campaign
-  has_many :npc_relations
-  has_many :allegiances
+  has_many :npc_relations, dependent: :destroy
+  has_many :allegiances, dependent: :destroy
+  belongs_to :location
   has_many :factions, through: :allegiances
   validates_presence_of :name, :campaign_id
+
+  before_save :check_location
 
   def npc_relations
     NpcRelation.where(npc1_id:self.id) + NpcRelation.where(npc2_id:self.id)
@@ -15,7 +18,6 @@ class Npc < ActiveRecord::Base
 
   def self.import(file, campaign_id)
     spreadsheet = open_spreadsheet(file)
-    puts spreadsheet.inspect
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
@@ -41,6 +43,19 @@ class Npc < ActiveRecord::Base
     when ".xls" then Roo::Excel.new(file.path)
     when ".xlsx" then Roo::Excelx.new(file.path)
     else raise "Unknown file type: #{file.original_filename}"
+    end
+  end
+
+  private
+
+  def check_location
+    loc = nil
+    loc = Location.find_by(id:self.location_id) if self.location_id
+    loc = Location.find_by(name:self.location_name, campaign_id:self.campaign_id) if !loc && self.location_name
+    if loc
+      self.location_name = loc.name
+    else
+      self.location_id = nil
     end
   end
 end

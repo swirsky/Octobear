@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :locations
+
   resources :allegiances
 
   resources :factions do
@@ -40,6 +42,8 @@ Rails.application.routes.draw do
   get ':slug' => 'links#show'
 
   Rails.application.routes.draw do
+  resources :locations
+
   resources :allegiances
 
   resources :factions

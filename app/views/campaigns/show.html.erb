@@ -16,6 +16,10 @@
 <strong><%= link_to "Factions", factions_path(campaign_id:@campaign.id) %></strong>
 </p>
 
+<p>
+<strong><%= link_to "Locations", locations_path(campaign_id:@campaign.id) %></strong>
+</p>
+
 
 <%= link_to 'Edit', edit_campaign_path(@campaign) %> |
 <%= link_to 'Back', campaigns_path %>

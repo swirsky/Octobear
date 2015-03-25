@@ -27,8 +27,12 @@
 </p>
 
 <p>
-  <strong>Location:</strong>
-  <%= @npc.location %>
+<strong>Location:</strong>
+<% if @npc.location.nil? %>
+  <%= @npc.location_name %>
+<% else %>
+  <%= link_to @npc.location_name, @npc.location %>
+<% end %>
 </p>
 
 <p>

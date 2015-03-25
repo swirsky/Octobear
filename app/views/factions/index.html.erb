@@ -33,7 +33,11 @@
         <td><%= faction.description %></td>
         <td><%= faction.main_type %></td>
         <td><%= faction.subtype %></td>
-        <td><%= faction.headquarters %></td>
+        <% if faction.location.nil? %>
+          <td><%= faction.headquarters %></td>
+        <% else %>
+          <td><%= link_to faction.headquarters, faction.location %></td>
+        <% end %>
         <td><%= faction.influence %></td>
         <td><%= faction.strength %></td>
         <td><%= faction.secret %></td>

@@ -77,11 +77,10 @@ class FactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def faction_params
-      params.require(:faction).permit(:name, :campaign_id, :leader_id, :description, :main_type, :subtype, :headquarters, :influence, :strength, :secret)
+      params.require(:faction).permit(:name, :campaign_id, :leader_id, :description, :main_type, :subtype, :headquarters, :location_id, :influence, :strength, :secret)
     end
 
     def set_campaign
-      puts "SETTING CAMPAIGN! CAMPAIGN ID: #{campaign_id}"
       if campaign_id
         @campaign = Campaign.find(campaign_id)
       end

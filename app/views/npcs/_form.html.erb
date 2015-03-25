@@ -29,8 +29,8 @@
     <%= f.select :gender, options_for_select(CampaignsHelper::GENDER_OPTIONS, @npc.gender) %>
   </div>
   <div class="field">
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
+    <%= f.label "Enter or Select a Location" %><br>
+    <%= f.text_field :location %> | <%= f.select :location_id, options_from_collection_for_select(@campaign.locations, 'id', 'name') %>
   </div>
   <div class="field">
     <%= f.label :notes %><br>

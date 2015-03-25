@@ -33,8 +33,8 @@
     <%= f.text_field :subtype %>
   </div>
   <div class="field">
-    <%= f.label :headquarters %><br>
-    <%= f.text_field :headquarters %>
+    <%= f.label "Enter or Select a Location" %><br>
+    <%= f.text_field :headquarters %> | <%= f.select :location_id, options_from_collection_for_select(@campaign.locations, 'id', 'name') %>
   </div>
   <div class="field">
     <%= f.label :influence %><br>
