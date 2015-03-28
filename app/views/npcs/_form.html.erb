@@ -18,7 +18,15 @@
     <%= f.hidden_field :campaign_id, value:@campaign.id %>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :physical_description %><br>
+    <%= f.text_area :physical_description %>
+  </div>
+  <div class="field">
+    <%= f.label :personality %><br>
+    <%= f.text_area :personality %>
   </div>
   <div class="field">
     <%= f.label :race %><br>
@@ -43,6 +51,10 @@
   <div class="field">
     <%= f.label :strength %><br>
     <%= f.select :strength, options_for_select(CampaignsHelper::STRENGTH_OPTIONS, @npc.strength) %>
+  </div>
+  <div class="field">
+    <%= f.label :publicity %><br>
+    <%= f.select :publicity, options_for_select(CampaignsHelper::PUBLICITY_OPTIONS, @npc.publicity) %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -4,5 +4,5 @@ module CampaignsHelper
   GENDER_OPTIONS = ["", "Male", "Female"]
   INFLUENCE_OPTIONS = %w(Fine Diminuative Tiny Small Medium Large Huge Gargantuan Colossal)
   STRENGTH_OPTIONS = %w(Fine Diminuative Tiny Small Medium Large Huge Gargantuan Colossal)
-
+  PUBLICITY_OPTIONS = %w(Fine Diminuative Tiny Small Medium Large Huge Gargantuan Colossal)
 end

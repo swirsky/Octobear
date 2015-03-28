@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325195647) do
+ActiveRecord::Schema.define(version: 20150328161519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,8 +117,8 @@ ActiveRecord::Schema.define(version: 20150325195647) do
   add_index "npc_relations", ["npc1_id", "npc2_id"], name: "index_npc_relations_on_npc1_id_and_npc2_id", using: :btree
 
   create_table "npcs", force: :cascade do |t|
-    t.string   "name",          null: false
-    t.integer  "campaign_id",   null: false
+    t.string   "name",                 null: false
+    t.integer  "campaign_id",          null: false
     t.string   "description"
     t.string   "race"
     t.string   "gender"
@@ -126,9 +126,12 @@ ActiveRecord::Schema.define(version: 20150325195647) do
     t.string   "notes"
     t.string   "influence"
     t.string   "strength"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "location_id"
+    t.string   "personality"
+    t.string   "physical_description"
+    t.string   "publicity"
   end
 
   add_index "npcs", ["campaign_id"], name: "index_npcs_on_campaign_id", using: :btree

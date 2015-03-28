@@ -81,7 +81,7 @@ class NpcsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def npc_params
-      params.require(:npc).permit(:name, :campaign_id, :description, :race, :gender, :location_name, :location_id, :notes, :influence, :strength)
+      params.require(:npc).permit(:name, :campaign_id, :description, :phsyical_description, :personality, :race, :gender, :location_name, :location_id, :notes, :influence, :strength, :publicity)
     end
 
     def set_campaign

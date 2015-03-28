@@ -1,55 +1,70 @@
 <div style='width:50%;'>
   <%= render partial: "npc_connections", locals: {npc:@npc} %>
 
-<p>
+  <p>
   <strong>Name:</strong>
   <%= @npc.name %>
-</p>
+  </p>
 
-<p>
+  <p>
   <strong>Campaign:</strong>
   <%= link_to @npc.campaign.name, @npc.campaign %>
-</p>
+  </p>
 
-<p>
+  <p>
   <strong>Description:</strong>
   <%= @npc.description %>
-</p>
+  </p>
 
-<p>
+  <p>
+  <strong>Phsyical Description:</strong>
+  <%= @npc.physical_description %>
+  </p>
+
+  <p>
+  <strong>Personality:</strong>
+  <%= @npc.personality %>
+  </p>
+
+  <p>
   <strong>Race:</strong>
   <%= @npc.race %>
-</p>
+  </p>
 
-<p>
+  <p>
   <strong>Gender:</strong>
   <%= @npc.gender %>
-</p>
+  </p>
 
-<p>
-<strong>Location:</strong>
-<% if @npc.location.nil? %>
-  <%= @npc.location_name %>
+  <p>
+  <strong>Location:</strong>
+  <% if @npc.location.nil? %>
+    <%= @npc.location_name %>
 <% else %>
-  <%= link_to @npc.location_name, @npc.location %>
+    <%= link_to @npc.location_name, @npc.location %>
 <% end %>
-</p>
+  </p>
 
-<p>
+  <p>
   <strong>Notes:</strong>
   <%= @npc.notes %>
-</p>
+  </p>
 
-<p>
+  <p>
   <strong>Influence:</strong>
   <%= @npc.influence %>
-</p>
+  </p>
 
-<p>
+  <p>
   <strong>Strength:</strong>
   <%= @npc.strength %>
-</p>
+  </p>
 
-<%= link_to 'Edit', edit_npc_path(@npc) %> |
-<%= link_to 'Back', npcs_path(campaign_id:@campaign.id) %>
+  <p>
+  <strong>Publicity:</strong>
+  <%= @npc.publicity %>
+  </p>
+
+  <%= link_to 'Edit', edit_npc_path(@npc) %> |
+  <%= link_to 'Back', npcs_path(campaign_id:@campaign.id) %>
 </div>
