@@ -2,11 +2,17 @@ class AllegiancesController < ApplicationController
   before_action :set_allegiance, only: [:show, :edit, :update, :destroy]
   before_action :set_npc, only: [:show, :edit]
   before_action :set_faction, only: [:show, :edit]
+  
+  before_filter :ensure_gm!, except: [:index, :show]
 
   # GET /allegiances
   # GET /allegiances.json
   def index
-    @allegiances = Allegiance.all
+    if current_user.is_gm?
+      @allegiances = @campaign.allegiances
+    else
+      @allegiances = @campaign.allegiances.public_knowledge
+    end
   end
 
   # GET /allegiances/1

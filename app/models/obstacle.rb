@@ -1,4 +1,5 @@
 class Obstacle < ActiveRecord::Base
+  
   belongs_to :chase
 
   validates_uniqueness_of :order, :uniqueness => {:scope => :chase_id}

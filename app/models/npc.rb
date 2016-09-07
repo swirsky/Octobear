@@ -3,6 +3,8 @@ require 'roo'
 class Npc < ActiveRecord::Base
   include CampaignsHelper
 
+  scope :public_knowledge, -> { where(is_public: true) }
+
   belongs_to :campaign
   has_many :npc_relations, dependent: :destroy
   has_many :allegiances, dependent: :destroy

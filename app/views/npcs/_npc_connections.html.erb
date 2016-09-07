@@ -1,5 +1,13 @@
+<% if current_user.is_gm? %>
 <div class='navbar navbar-right panel panel-default'>
   <%= render partial: "allegiances/index", locals: {list_name:'Faction', allegiances:npc.allegiances, base:npc} %>
   <br />
-  <%= render partial: "npc_relations/index", locals:{npc:npc} %>
+  <%= render partial: "npc_relations/index", locals:{npc:npc, npc_relations: npc.npc_relations} %>
 </div>
+<% else %>
+<div class='navbar navbar-right panel panel-default'>
+  <%= render partial: "allegiances/index", locals: {list_name:'Faction', allegiances:npc.allegiances.public_knowledge, base:npc} %>
+  <br />
+  <%= render partial: "npc_relations/index", locals:{npc:npc, npc_relations: npc.npc_relations.public_knowledge} %>
+</div>
+<% end %>

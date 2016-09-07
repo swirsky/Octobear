@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
   def setup_user
     @user ||= current_user if current_user
   end
+
+  def ensure_gm!
+    redirect_to :back, notice:"I don't think so" and return unless current_user.is_gm?
+  end
 end

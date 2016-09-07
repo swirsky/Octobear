@@ -1,0 +1,35 @@
+<p>
+  <strong>Main Type:</strong>
+  <%= @faction.main_type %>
+</p>
+
+<p>
+  <strong>Subtype:</strong>
+  <%= @faction.subtype %>
+</p>
+
+<p>
+  <strong>Headquarters:</strong>
+<% if @faction.location.nil? %>
+  <%= @faction.headquarters %>
+<% else %>
+  <%= link_to @faction.headquarters, @faction.location %>
+<% end %>
+</p>
+
+<p>
+  <strong>Influence:</strong>
+  <%= @faction.influence %>
+</p>
+
+<p>
+  <strong>Strength:</strong>
+  <%= @faction.strength %>
+</p>
+
+<p>
+  <strong>Secret:</strong>
+  <%= @faction.secret %>
+</p>
+
+<%= link_to 'Edit', edit_faction_path(@faction) %> |

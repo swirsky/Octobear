@@ -1,4 +1,7 @@
 class Location < ActiveRecord::Base
+  
+  scope :public_knowledge, -> { where(is_public: true) }
+
   validates_presence_of :name, :campaign_id
   belongs_to :campaign
   has_many :locations

@@ -11,18 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150328161519) do
+ActiveRecord::Schema.define(version: 20160907004321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "allegiances", force: :cascade do |t|
-    t.integer  "npc_id",     null: false
-    t.integer  "faction_id", null: false
+    t.integer  "npc_id",      null: false
+    t.integer  "faction_id",  null: false
     t.string   "status"
     t.string   "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "campaign_id"
+    t.boolean  "is_public"
   end
 
   add_index "allegiances", ["npc_id", "faction_id"], name: "index_allegiances_on_npc_id_and_faction_id", using: :btree
@@ -65,6 +67,7 @@ ActiveRecord::Schema.define(version: 20150328161519) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "location_id"
+    t.boolean  "is_public"
   end
 
   add_index "factions", ["campaign_id"], name: "index_factions_on_campaign_id", using: :btree
@@ -88,6 +91,7 @@ ActiveRecord::Schema.define(version: 20150328161519) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "parent_id"
+    t.boolean  "is_public"
   end
 
   add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
@@ -101,6 +105,7 @@ ActiveRecord::Schema.define(version: 20150328161519) do
     t.string   "notes"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.boolean  "is_public"
   end
 
   add_index "npc_relations", ["campaign_id"], name: "index_npc_relations_on_campaign_id", using: :btree
@@ -122,6 +127,7 @@ ActiveRecord::Schema.define(version: 20150328161519) do
     t.string   "personality"
     t.string   "physical_description"
     t.string   "publicity"
+    t.boolean  "is_public"
   end
 
   add_index "npcs", ["campaign_id"], name: "index_npcs_on_campaign_id", using: :btree

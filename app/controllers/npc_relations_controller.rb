@@ -1,5 +1,6 @@
 class NpcRelationsController < ApplicationController
   before_filter :ensure_current_user, :set_campaign
+  before_filter :ensure_gm!, except: [:index, :show]
   
   before_action :set_npc_relation, only: [:show, :edit, :update, :destroy]
   before_action :set_npcs, only: [:edit, :new]
@@ -9,7 +10,11 @@ class NpcRelationsController < ApplicationController
   # GET /npc_relations
   # GET /npc_relations.json
   def index
-    @npc_relations = @campaign.npc_relations
+    if current_user.is_gm?
+      @npc_relations = @campaign.npc_relations
+    else
+      @npc_relations = @campaign.npc_relations.public_knowledge
+    end
   end
 
   # GET /npc_relations/1

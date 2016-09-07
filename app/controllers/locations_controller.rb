@@ -1,12 +1,18 @@
 class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
+  before_filter :ensure_gm!, except: [:index, :show]
   before_filter :ensure_current_user, :set_campaign
 
   # GET /locations
   # GET /locations.json
   def index
-    @locations = @campaign.locations
+
+    if current_user.is_gm?
+      @locations = @campaign.locations
+    else
+      @locations = @campaign.locations.public_knowledge
+    end
 
     respond_to do |format|
       format.html

@@ -1,4 +1,7 @@
 class NpcRelation < ActiveRecord::Base
+  
+  scope :public_knowledge, -> { where(is_public: true) }
+
   validates_presence_of :campaign_id, :npc1_id, :npc2_id, :status
 
   def npc1

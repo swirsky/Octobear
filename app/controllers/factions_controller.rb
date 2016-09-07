@@ -3,10 +3,16 @@ class FactionsController < ApplicationController
   before_action :set_npcs, only: [:edit, :new]
 
   before_filter :ensure_current_user, :set_campaign
+  before_filter :ensure_gm!, except: [:index, :show]
 
   # GET /factions
   # GET /factions.json
   def index
+    if current_user.is_gm?
+      @factions = @campaign.factions
+    else
+      @factions = @campaign.factions.public_knowledge
+    end
     @factions = @campaign.factions
 
     respond_to do |format|

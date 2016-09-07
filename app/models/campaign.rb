@@ -5,5 +5,6 @@ class Campaign < ActiveRecord::Base
   has_many :npcs
   has_many :factions
   has_many :locations
+  has_many :allegiances
 
 end

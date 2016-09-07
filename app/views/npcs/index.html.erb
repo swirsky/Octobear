@@ -8,7 +8,9 @@
   <%= hidden_field_tag :campaign_id, @campaign.id %>
   <%= submit_tag "Import" %>
 <% end %>
-<p><strong>Download NPCs:</strong> <%= link_to "CSV", npcs_path(campaign_id:@campaign.id, format: "csv") %></p>
+<% if current_user.is_gm? %>
+  <p><strong>Download NPCs:</strong> <%= link_to "CSV", npcs_path(campaign_id:@campaign.id, format: "csv") %></p>
+<% end %>
 
 <table class='table table-hover'>
   <thead>
@@ -18,10 +20,12 @@
       <th>Race</th>
       <th>Gender</th>
       <th>Location</th>
-      <th>Notes</th>
-      <th>Influence</th>
-      <th>Strength</th>
-      <th colspan="3"></th>
+      <% if current_user.is_gm? %>
+        <th>Notes</th>
+        <th>Influence</th>
+        <th>Strength</th>
+        <th colspan="3"></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -33,12 +37,14 @@
         <td><%= npc.race %></td>
         <td><%= npc.gender %></td>
         <td><%= npc.location_name %></td>
-        <td><%= npc.notes %></td>
-        <td><%= npc.influence %></td>
-        <td><%= npc.strength %></td>
-        <td><%= link_to 'Show', npc %></td>
-        <td><%= link_to 'Edit', edit_npc_path(npc) %></td>
-        <td><%= link_to 'Destroy', npc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.is_gm? %>
+          <td><%= npc.notes %></td>
+          <td><%= npc.influence %></td>
+          <td><%= npc.strength %></td>
+          <td><%= link_to 'Show', npc %></td>
+          <td><%= link_to 'Edit', edit_npc_path(npc) %></td>
+          <td><%= link_to 'Destroy', npc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

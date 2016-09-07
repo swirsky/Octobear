@@ -37,34 +37,17 @@
   </p>
 
   <p>
-  <strong>Location:</strong>
-  <% if @npc.location.nil? %>
-    <%= @npc.location_name %>
-<% else %>
-    <%= link_to @npc.location_name, @npc.location %>
-<% end %>
+    <strong>Location:</strong>
+    <% if @npc.location.nil? %>
+      <%= @npc.location_name %>
+    <% else %>
+      <%= link_to @npc.location_name, @npc.location %>
+    <% end %>
   </p>
 
-  <p>
-  <strong>Notes:</strong>
-  <%= @npc.notes %>
-  </p>
+  <% if current_user.is_gm? %>
+    <%= render 'admin_show' %>
+  <% end %>
 
-  <p>
-  <strong>Influence:</strong>
-  <%= @npc.influence %>
-  </p>
-
-  <p>
-  <strong>Strength:</strong>
-  <%= @npc.strength %>
-  </p>
-
-  <p>
-  <strong>Publicity:</strong>
-  <%= @npc.publicity %>
-  </p>
-
-  <%= link_to 'Edit', edit_npc_path(@npc) %> |
   <%= link_to 'Back', npcs_path(campaign_id:@campaign.id) %>
 </div>

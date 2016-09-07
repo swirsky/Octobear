@@ -2,11 +2,17 @@ class NpcsController < ApplicationController
   before_action :set_npc, only: [:show, :edit, :update, :destroy]
 
   before_filter :ensure_current_user, :set_campaign
+  before_filter :ensure_gm!, except: [:index, :show]
 
   # GET /npcs
   # GET /npcs.json
   def index
-    @npcs = @campaign.npcs
+
+    if current_user.is_gm?
+      @npcs = @campaign.npcs
+    else
+      @npcs = @campaign.npcs.public_knowledge
+    end
 
     respond_to do |format|
       format.html
