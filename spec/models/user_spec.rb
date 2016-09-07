@@ -20,7 +20,7 @@ RSpec.describe User, type: :model do
     expect(u.password).to be nil
     expect(u.salt).to be nil
     expect(u.encrypted_password).to_not be nil
-    expect(u.roles_mask).to_not be nil
+    expect(u.access_role).to_not be nil
   end
 
 end

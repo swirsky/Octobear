@@ -31,8 +31,6 @@ gem 'factory_girl_rails'
 
 #devise for user login
 gem 'devise'
-#role model for roles_mask
-gem 'role_model'
 
 #roo for imports
 gem 'roo'

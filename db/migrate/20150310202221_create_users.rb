@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email, unique:true, null:false
       t.string :username, unique:true
       t.string :encrypted_password
-      t.integer :roles_mask, null:false
+      t.string :access_role, null:false
 
       t.timestamps null: false
     end
