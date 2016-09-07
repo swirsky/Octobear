@@ -7,8 +7,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  include RoleModel
-
   has_many :links, dependent: :destroy
   has_many :one_time_pads, dependent: :destroy
   has_many :reverse_date_cyphers, dependent: :destroy
@@ -23,12 +21,15 @@ class User < ActiveRecord::Base
   attr_accessor :password, :salt
   validates :password, :confirmation => true #password_confirmation attr
   before_save :encrypt_password
-  before_save :set_roles_mask
-  after_save :clear_password
+  before_save :set_access_role
+  
+  def is_player?
+    access_role == "Player"
+  end
 
-  #role model
-  roles_attribute :roles_mask
-  roles :admin, :client
+  def is_gm?
+    access_role == "GM"
+  end
 
   private
 
@@ -44,8 +45,8 @@ class User < ActiveRecord::Base
     self.password = nil
   end
 
-  def set_roles_mask
-    #only one role presently
-    self.roles = [:client]
+  def set_access_role
+    #only one role presently, GM set by console
+    self.access_role = "Player"
   end
 end

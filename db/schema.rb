@@ -42,16 +42,6 @@ ActiveRecord::Schema.define(version: 20150328161519) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "casters", force: :cascade do |t|
-    t.string   "name",                   null: false
-    t.integer  "user_id",                null: false
-    t.integer  "wins",       default: 0, null: false
-    t.integer  "losses",     default: 0, null: false
-    t.integer  "ties",       default: 0, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
   create_table "chases", force: :cascade do |t|
     t.string   "name",        null: false
     t.integer  "cr",          null: false
@@ -207,25 +197,6 @@ ActiveRecord::Schema.define(version: 20150328161519) do
     t.integer  "page_id"
   end
 
-  create_table "summoned_creatures", force: :cascade do |t|
-    t.string   "name",                          null: false
-    t.integer  "caster_id",                     null: false
-    t.string   "type",                          null: false
-    t.integer  "hp",                            null: false
-    t.integer  "str",                           null: false
-    t.integer  "dex",                           null: false
-    t.integer  "con",                           null: false
-    t.integer  "intel",                         null: false
-    t.integer  "wis",                           null: false
-    t.integer  "cha",                           null: false
-    t.string   "weak_against",                  null: false
-    t.string   "resistant_against",             null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "experience",        default: 0, null: false
-    t.integer  "level",             default: 1, null: false
-  end
-
   create_table "transposition_ciphers", force: :cascade do |t|
     t.string   "input",                           null: false
     t.integer  "user_id",                         null: false
@@ -242,7 +213,7 @@ ActiveRecord::Schema.define(version: 20150328161519) do
     t.string   "email",                  default: "", null: false
     t.string   "username"
     t.string   "encrypted_password",     default: "", null: false
-    t.integer  "roles_mask",                          null: false
+    t.string   "access_role",                         null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "reset_password_token"
