@@ -1,4 +1,6 @@
 class NpcRelation < ActiveRecord::Base
+
+  delegate :campaign, to: :npc1
   
   scope :public_knowledge, -> { where(is_public: true) }
 
@@ -15,4 +17,5 @@ class NpcRelation < ActiveRecord::Base
   def other_npc(npc)
     [npc1, npc2] - npc
   end
+
 end

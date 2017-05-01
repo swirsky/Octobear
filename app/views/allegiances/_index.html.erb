@@ -20,7 +20,7 @@
   </tbody>
 </table>
 <% if base.is_a?(Faction) %>
-  <%= link_to "New Allegiance", new_allegiance_path(faction_id:base.id) %>
+  <%= link_to "New Allegiance", new_allegiance_path(faction_id:base.id, campaign_id:@campaign.id) %>
   <% else %>
-  <%= link_to "New Allegiance", new_allegiance_path(npc_id:base.id) %>
+  <%= link_to "New Allegiance", new_allegiance_path(npc_id:base.id, campaign_id:@campaign.id) %>
   <% end %>

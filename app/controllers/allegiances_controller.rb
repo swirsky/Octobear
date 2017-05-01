@@ -2,17 +2,14 @@ class AllegiancesController < ApplicationController
   before_action :set_allegiance, only: [:show, :edit, :update, :destroy]
   before_action :set_npc, only: [:show, :edit]
   before_action :set_faction, only: [:show, :edit]
+  before_action :set_campaign
   
   before_filter :ensure_gm!, except: [:index, :show]
 
   # GET /allegiances
   # GET /allegiances.json
   def index
-    if current_user.is_gm?
-      @allegiances = @campaign.allegiances
-    else
-      @allegiances = @campaign.allegiances.public_knowledge
-    end
+    @allegiances = @campaign.accessible_allegiances(current_user)
   end
 
   # GET /allegiances/1
@@ -84,6 +81,27 @@ class AllegiancesController < ApplicationController
 
     def set_npc
       @npc = @allegiance.npc
+    end
+
+    def set_campaign
+      if campaign_id
+        @campaign = Campaign.find(campaign_id)
+      end
+
+      if @allegiance && !@allegiance.campaign.nil?
+        @campaign ||= @allegiance.campaign
+      end
+      redirect_to :root and return unless @campaign
+    end
+
+    def campaign_id
+      if params[:campaign_id]
+        params[:campaign_id]
+      elsif params[:allegiance] && params[:allegiance][:campaign_id]
+        params[:allegiance][:campaign_id]
+      else
+        nil
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

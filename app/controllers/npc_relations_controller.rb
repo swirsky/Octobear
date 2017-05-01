@@ -10,11 +10,7 @@ class NpcRelationsController < ApplicationController
   # GET /npc_relations
   # GET /npc_relations.json
   def index
-    if current_user.is_gm?
-      @npc_relations = @campaign.npc_relations
-    else
-      @npc_relations = @campaign.npc_relations.public_knowledge
-    end
+    @npc_relations = @campaign.accessible_npc_relations(current_user)
   end
 
   # GET /npc_relations/1

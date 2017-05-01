@@ -23,12 +23,17 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   before_save :set_access_role
   
-  def is_player?
-    access_role == "Player"
+  ACCESS_ROLES = {
+                    client:"client"
+                 }
+
+
+  def is_player?(campaign)
+    campaign.user_id != self.id?
   end
 
-  def is_gm?
-    access_role == "GM"
+  def is_gm?(campaign)
+    campaign.user_id == self.id?
   end
 
   private
@@ -47,6 +52,6 @@ class User < ActiveRecord::Base
 
   def set_access_role
     #only one role presently, GM set by console
-    self.access_role = "Player"
+    self.access_role = :client
   end
 end

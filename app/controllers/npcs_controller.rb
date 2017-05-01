@@ -7,13 +7,8 @@ class NpcsController < ApplicationController
   # GET /npcs
   # GET /npcs.json
   def index
-
-    if current_user.is_gm?
-      @npcs = @campaign.npcs
-    else
-      @npcs = @campaign.npcs.public_knowledge
-    end
-
+    @npcs = @campaign.accessible_npcs(current_user)
+  
     respond_to do |format|
       format.html
       format.csv { send_data @npcs.to_csv }

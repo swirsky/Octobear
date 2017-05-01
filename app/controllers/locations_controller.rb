@@ -7,13 +7,8 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
-
-    if current_user.is_gm?
-      @locations = @campaign.locations
-    else
-      @locations = @campaign.locations.public_knowledge
-    end
-
+    @locations = @campaign.accessible_locations
+    
     respond_to do |format|
       format.html
       format.csv { send_data @locations.to_csv }

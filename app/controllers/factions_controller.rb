@@ -8,12 +8,7 @@ class FactionsController < ApplicationController
   # GET /factions
   # GET /factions.json
   def index
-    if current_user.is_gm?
-      @factions = @campaign.factions
-    else
-      @factions = @campaign.factions.public_knowledge
-    end
-    @factions = @campaign.factions
+    @factions = @campaign.accessible_factions(current_user)
 
     respond_to do |format|
       format.html
